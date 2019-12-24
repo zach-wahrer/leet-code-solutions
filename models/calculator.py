@@ -11,6 +11,9 @@ class Calculator:
     def multiply(self, x, y):
         return x * y
 
+    def divide(self, x, y):
+        pass
+
     def sum(self, numbers):  # Take in an array of nums
         sum = 0
         for i in numbers:
@@ -18,6 +21,15 @@ class Calculator:
         return sum
 
     def max(self, numbers):  # Find max of list of nums
+        pass
+
+    def mod(self, x, y):
+        pass
+
+    def square(self, x):
+        pass
+
+    def square_root(self, x):
         pass
 
 
