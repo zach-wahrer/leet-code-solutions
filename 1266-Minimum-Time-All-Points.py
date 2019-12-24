@@ -21,13 +21,7 @@ import unittest
 
 def min_time(points):
     sec = 0
-    for i in range(0, len(points)):
-        cur = points[i]
-        # Check for next coordinate
-        if i < len(points) - 1:
-            next = points[i + 1]
-        else:
-            break
+    for cur, next in zip(points[:-1], points[1:]):
 
         while True:
             # Check to see if we need to keep going
