@@ -19,39 +19,22 @@ Psudocode:
 import unittest
 
 
-def min_time(points):
-    sec = 0
-    for cur, next in zip(points[:-1], points[1:]):
+def distance_between_points(point1, point2):
+    x_dif = abs(point1[0] - point2[0])
+    y_dif = abs(point1[1] - point2[1])
+    return max(x_dif, y_dif)
 
-        while True:
-            # Check to see if we need to keep going
-            if cur[0] == next[0] and cur[1] == next[1]:
-                break
-            # If next x coord is higher
-            if cur[0] < next[0]:
-                cur[0] += 1
-                sec += 1
-                if cur[1] < next[1]:
-                    cur[1] += 1
-                elif cur[1] > next[1]:
-                    cur[1] -= 1
-            # If next x coord is lower
-            elif cur[0] > next[0]:
-                cur[0] -= 1
-                sec += 1
-                if cur[1] < next[1]:
-                    cur[1] += 1
-                elif cur[1] > next[1]:
-                    cur[1] -= 1
-            # Get y coord to be equal
-            else:
-                if cur[1] < next[1]:
-                    cur[1] += 1
-                    sec += 1
-                elif cur[1] > next[1]:
-                    cur[1] -= 1
-                    sec += 1
+
+def min_time(points) -> int:
+    sec = 0
+    for current_point, next_point in zip(points[:-1], points[1:]):
+        sec += distance_between_points(current_point, next_point)
     return sec
+
+
+# Dan's one liner
+def min_time2(points):
+    return sum([max(abs(cp[0] - np[0]), abs(cp[1] - np[1])) for cp, np in zip(points[:-1], points[1:])])
 
 
 class TestMinimum(unittest.TestCase):
