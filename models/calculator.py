@@ -12,7 +12,7 @@ class Calculator:
         return x * y
 
     def divide(self, x, y):
-        pass
+        return x / y
 
     def sum(self, numbers):  # Take in an array of nums
         sum = 0
@@ -76,6 +76,18 @@ class TestCalculator(unittest.TestCase):
         y = 0
         ans = 0
         self.assertEqual(Calculator().multiply(x, y), ans)
+
+    def test_divide_50_4(self):
+        x = 50
+        y = 4
+        ans = 12.5
+        self.assertEqual(Calculator().divide(x, y), ans)
+
+    def test_divide_20_5(self):
+        x = 20
+        y = 5
+        ans = 4
+        self.assertEqual(Calculator().divide(x, y), ans)
 
     def test_sum_minus_11519(self):
         nums = [-1, -1, -5, -1, -9]
