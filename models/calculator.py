@@ -21,7 +21,7 @@ class Calculator:
         return sum
 
     def max(self, numbers):  # Find max of list of nums
-        pass
+        return max(numbers)
 
     def mod(self, x, y):
         pass
@@ -91,6 +91,16 @@ class TestCalculator(unittest.TestCase):
         nums = [3, 1, 4, -9]
         ans = -1
         self.assertEqual(Calculator().sum(nums), ans)
+
+    def test_max_1469(self):
+        nums = [1, 4, 6, 9]
+        ans = 9
+        self.assertEqual(Calculator().max(nums), ans)
+
+    def test_max_01000139(self):
+        nums = [0, 1000, 13, -9]
+        ans = 1000
+        self.assertEqual(Calculator().max(nums), ans)
 
 
 if __name__ == "__main__":
