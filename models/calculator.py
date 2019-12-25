@@ -27,7 +27,7 @@ class Calculator:
         return x % y
 
     def square(self, x):
-        pass
+        return x**2
 
     def square_root(self, x):
         pass
@@ -131,6 +131,16 @@ class TestCalculator(unittest.TestCase):
         y = 977
         ans = 23
         self.assertEqual(Calculator().mod(x, y), ans)
+
+    def test_square_50(self):
+        x = 50
+        ans = 2500
+        self.assertEqual(Calculator().square(x), ans)
+
+    def test_square_10(self):
+        x = -10
+        ans = 100
+        self.assertEqual(Calculator().square(x), ans)
 
 
 if __name__ == "__main__":
