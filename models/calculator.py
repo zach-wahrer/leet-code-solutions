@@ -1,4 +1,5 @@
 import unittest
+import math
 
 
 class Calculator:
@@ -30,7 +31,7 @@ class Calculator:
         return x**2
 
     def square_root(self, x):
-        pass
+        return math.sqrt(x)
 
 
 class TestCalculator(unittest.TestCase):
@@ -141,6 +142,16 @@ class TestCalculator(unittest.TestCase):
         x = -10
         ans = 100
         self.assertEqual(Calculator().square(x), ans)
+
+    def test_square_root_25(self):
+        x = 25
+        ans = 5
+        self.assertEqual(Calculator().square_root(x), ans)
+
+    def test_square_root_49(self):
+        x = 49
+        ans = 7
+        self.assertEqual(Calculator().square_root(x), ans)
 
 
 if __name__ == "__main__":
