@@ -24,7 +24,7 @@ class Calculator:
         return max(numbers)
 
     def mod(self, x, y):
-        pass
+        return x % y
 
     def square(self, x):
         pass
@@ -101,6 +101,24 @@ class TestCalculator(unittest.TestCase):
         nums = [0, 1000, 13, -9]
         ans = 1000
         self.assertEqual(Calculator().max(nums), ans)
+
+    def test_mod_10_2(self):
+        x = 10
+        y = 2
+        ans = 0
+        self.assertEqual(Calculator().mod(x, y), ans)
+
+    def test_mod_4_3(self):
+        x = 4
+        y = 3
+        ans = 1
+        self.assertEqual(Calculator().mod(x, y), ans)
+
+    def test_mod_1000_977(self):
+        x = 1000
+        y = 977
+        ans = 23
+        self.assertEqual(Calculator().mod(x, y), ans)
 
 
 if __name__ == "__main__":
