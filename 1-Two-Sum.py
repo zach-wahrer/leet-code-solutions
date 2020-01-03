@@ -1,13 +1,19 @@
 '''
 Psudocode:
-
+    Loop through numbers
+        Add current number to next number, seeing if match
+        If no match found with that number, go to next
+        Repeat
 '''
 
 import unittest
 
 
 def check_sums(nums: list, target: int) -> list:
-    pass
+    for cur_position in range(len(nums)):
+        for rem_numbers in range(cur_position + 1, len(nums)):
+            if nums[cur_position] + nums[rem_numbers] == target:
+                return [cur_position, rem_numbers]
 
 
 class TestCheckSums(unittest.TestCase):
