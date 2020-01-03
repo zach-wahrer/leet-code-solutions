@@ -27,6 +27,11 @@ class TestCheckSums(unittest.TestCase):
         output = [2, 3]
         self.assertEqual(input, output)
 
+    def test_101112_1(self):
+        input = check_sums([10, -11, 12], -1)
+        output = [0, 1]
+        self.assertEqual(input, output)
+
 
 if __name__ == "__main__":
     unittest.main()
