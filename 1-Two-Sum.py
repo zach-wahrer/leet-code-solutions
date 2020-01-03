@@ -9,7 +9,18 @@ Psudocode:
 import unittest
 
 
+# Hash Algorithm
 def check_sums(nums: list, target: int) -> list:
+    number_hash = dict()
+    for location, number in enumerate(nums):
+        if target - number not in number_hash:
+            number_hash[number] = location
+        else:
+            return [number_hash[target - number], location]
+
+
+# List Algorithm
+def check_sums_list(nums: list, target: int) -> list:
     for cur_position in range(len(nums)):
         for rem_numbers in range(cur_position + 1, len(nums)):
             if nums[cur_position] + nums[rem_numbers] == target:
