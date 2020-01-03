@@ -9,7 +9,13 @@ import unittest
 
 
 def find_single_int(nums: list) -> int:
-    pass
+    uniques = list()
+    for number in nums:
+        if number not in uniques:
+            uniques.append(number)
+        else:
+            uniques.remove(number)
+    return uniques[0]
 
 
 class TestSingleInt(unittest.TestCase):
