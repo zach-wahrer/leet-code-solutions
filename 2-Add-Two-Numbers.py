@@ -1,6 +1,11 @@
 '''
 Psudocode:
-
+    For each list:
+        Traverse list, building number
+        Reverse values
+    Add two numbers
+    Reverse values,
+    Build linked list and return head node
 '''
 
 import unittest
@@ -20,7 +25,20 @@ class ListNode:
 
 
 def add_linked_lists(l1: ListNode, l2: ListNode) -> ListNode:
-    pass
+    head_nodes = [l1, l2]
+    out_numbers = ["", ""]
+    for i, head in enumerate(head_nodes):
+        out_numbers[i] = get_list_number(head)
+    return out_numbers[0] + out_numbers[1]
+
+
+def get_list_number(head: ListNode) -> int:
+    number = list()
+    while head:
+        number.append(head.val)
+        head = head.next
+    number.reverse()
+    return int(''.join(map(str, number)))
 
 
 class TestAddingLinkedLists(unittest.TestCase):
