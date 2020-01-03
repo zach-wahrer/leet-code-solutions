@@ -32,66 +32,86 @@ Psudocode:
 import unittest
 
 
-def build_binary(head):
-    pointer = head
-    binary = list()
+def convert_binary(head: list) -> int:
+    binary_number = traverse_list(head)
+    return int(binary_number, 2)
 
+
+def traverse_list(head: list) -> str:
+    binary_number = str()
     while True:
-        binary.append(pointer.val)
-        if pointer.next is None:
+        binary_number += str(head.val)
+        if head.next is None:
             break
         else:
-            pointer = pointer.next
+            head = head.next
+    return binary_number
 
 
-def convert_binary(binary):
-    number = 0
-    value = 1
-    binary.reverse()
-    for i in binary:
-        if i == 1:
-            number += value
-            if value == 1:
-                value += 1
-            else:
-                value *= 2
+class ListNode:
+    def __init__(self, val):
+        self.val = val
+        self.next = None
+
+    def add(self, new_val):
+        if self.next is None:
+            self.next = ListNode(new_val)
         else:
-            if value == 1:
-                value += 1
-            else:
-                value *= 2
-    return number
+            self.next.add(new_val)
+        return self
 
 
 class TestBin(unittest.TestCase):
 
     def test_101(self):
-        input = convert_binary([1, 0, 1])
+        binary_number = [1, 0, 1]
+        head = ListNode(binary_number[0])
+        for digit in binary_number[1:]:
+            head.add(digit)
+        input = convert_binary(head)
         output = 5
         self.assertEqual(input, output)
 
     def test_0(self):
-        input = convert_binary([0])
+        binary_number = [0]
+        head = ListNode(binary_number[0])
+        input = convert_binary(head)
         output = 0
         self.assertEqual(input, output)
 
     def test_00(self):
-        input = convert_binary([0, 0])
+        binary_number = [0, 0]
+        head = ListNode(binary_number[0])
+        for digit in binary_number[1:]:
+            head.add(digit)
+        input = convert_binary(head)
         output = 0
         self.assertEqual(input, output)
 
     def test_01101(self):
-        input = convert_binary([0, 1, 1, 0, 1])
+        binary_number = [0, 1, 1, 0, 1]
+        head = ListNode(binary_number[0])
+        for digit in binary_number[1:]:
+            head.add(digit)
+        input = convert_binary(head)
         output = 13
         self.assertEqual(input, output)
 
     def test_11011(self):
-        input = convert_binary([1, 1, 0, 1, 1])
+        binary_number = [1, 1, 0, 1, 1]
+        head = ListNode(binary_number[0])
+        for digit in binary_number[1:]:
+            head.add(digit)
+        input = convert_binary(head)
         output = 27
         self.assertEqual(input, output)
 
     def test_10010001(self):
-        input = convert_binary([1, 0, 0, 1, 0, 0, 0, 1])
+        binary_number = [1, 0, 0, 1, 0, 0, 0, 1]
+        head = ListNode(binary_number[0])
+        for digit in binary_number[1:]:
+            head.add(digit)
+        input = convert_binary(head)
         output = 145
         self.assertEqual(input, output)
 
