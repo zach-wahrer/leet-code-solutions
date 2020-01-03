@@ -24,7 +24,12 @@ class ListNode:
         return self
 
 
-def add_linked_lists(l1: ListNode, l2: ListNode) -> ListNode:
+def output_sum(l1: ListNode, l2: ListNode) -> ListNode:
+    sum = add_linked_lists(l1, l2)
+    return build_node_output(sum)
+
+
+def add_linked_lists(l1: ListNode, l2: ListNode) -> int:
     head_nodes = [l1, l2]
     out_numbers = ["", ""]
     for i, head in enumerate(head_nodes):
@@ -39,6 +44,36 @@ def get_list_number(head: ListNode) -> int:
         head = head.next
     number.reverse()
     return int(''.join(map(str, number)))
+
+
+def build_node_output(out_number: int) -> ListNode:
+    number_list = [int(i) for i in str(out_number)]
+    number_list.reverse()
+    head = ListNode(number_list[0])
+    for digit in number_list[1:]:
+        head.add(digit)
+    return head
+
+
+class TestOutput(unittest.TestCase):
+
+    def test_out_807(self):
+        input = 807
+        head = build_node_output(input)
+        output = get_list_number(head)
+        self.assertEqual(input, output)
+
+    def test_out_93480(self):
+        input = 93480
+        head = build_node_output(input)
+        output = get_list_number(head)
+        self.assertEqual(input, output)
+
+    def test_out_0(self):
+        input = 0
+        head = build_node_output(input)
+        output = get_list_number(head)
+        self.assertEqual(input, output)
 
 
 class TestAddingLinkedLists(unittest.TestCase):
