@@ -1,14 +1,33 @@
 '''
 Psudocode:
-    Go through input numbers
-        Add number to unique list if it isn't there
-        Remove if it is
+    List:
+        Go through input numbers
+            Add number to unique list if it isn't there
+            Remove if it is
+
+    Hash:
+        Go through input numbers
+            Add numbers to unique dict if it isn't there
+            Remove if it is
+
 '''
 
 import unittest
 
 
+# Hash algorithm
 def find_single_int(nums: list) -> int:
+    uniques = dict()
+    for number in nums:
+        if number not in uniques:
+            uniques[number] = None
+        else:
+            uniques.pop(number)
+    return uniques.popitem()[0]
+
+
+# List algorithm
+def find_single_int_list(nums: list) -> int:
     uniques = list()
     for number in nums:
         if number not in uniques:
@@ -30,13 +49,13 @@ class TestSingleInt(unittest.TestCase):
         output = 4
         self.assertEqual(input, output)
 
-    def test_81518122(self):
-        input = find_single_int([8, 1, 5, 1, 8, 1, 2, 2])
+    def test_8151822(self):
+        input = find_single_int([8, 1, 5, 1, 8, 2, 2])
         output = 5
         self.assertEqual(input, output)
 
-    def test_448716181227(self):
-        input = find_single_int([4, 4, 8, 7, 1, 6, 1, 8, 1, 2, 2, 7])
+    def test_44876181227(self):
+        input = find_single_int([4, 4, 8, 7, 6, 1, 8, 1, 2, 2, 7])
         output = 6
         self.assertEqual(input, output)
 
