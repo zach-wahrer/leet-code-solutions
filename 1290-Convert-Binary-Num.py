@@ -32,22 +32,6 @@ Psudocode:
 import unittest
 
 
-def convert_binary(head: list) -> int:
-    binary_number = traverse_list(head)
-    return int(binary_number, 2)
-
-
-def traverse_list(head: list) -> str:
-    binary_number = str()
-    while True:
-        binary_number += str(head.val)
-        if head.next is None:
-            break
-        else:
-            head = head.next
-    return binary_number
-
-
 class ListNode:
     def __init__(self, val):
         self.val = val
@@ -59,6 +43,22 @@ class ListNode:
         else:
             self.next.add(new_val)
         return self
+
+
+def convert_binary(head: ListNode) -> int:
+    binary_number = traverse_list(head)
+    return int(binary_number, 2)
+
+
+def traverse_list(head: ListNode) -> str:
+    binary_number = str()
+    while True:
+        binary_number += str(head.val)
+        if head.next is None:
+            break
+        else:
+            head = head.next
+    return binary_number
 
 
 class TestBin(unittest.TestCase):
