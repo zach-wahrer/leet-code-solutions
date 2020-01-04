@@ -1,13 +1,25 @@
 '''
 Psudocode:
-
+    If number is negative, return false
+    If number is single digit, return true
+    Convert to string, reverse, convert back to int
+    Compare two numbers
 '''
 
 import unittest
 
 
 def check_palindrome(x: int) -> bool:
-    pass
+    if x < 0:
+        return False
+    elif x < 9:
+        return True
+    reversed_number_list = [i for i in str(x)[::-1]]
+    reversed_number = int(''.join(reversed_number_list))
+    if reversed_number == x:
+        return True
+    else:
+        return False
 
 
 class TestPalindromeCheck(unittest.TestCase):
