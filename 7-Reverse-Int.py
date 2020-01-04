@@ -10,8 +10,8 @@ import unittest
 
 
 def reverse_int(x: int) -> int:
-    number = [int(i) for i in str(abs(x))[::-1]]
-    final_number = int(''.join(map(str, number)))
+    final_number = int(str(abs(x))[::-1])
+
     if final_number not in range(-2**31, 2**31 - 1):
         return 0
     elif x < 0:
