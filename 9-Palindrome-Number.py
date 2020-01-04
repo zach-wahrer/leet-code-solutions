@@ -12,14 +12,8 @@ import unittest
 def check_palindrome(x: int) -> bool:
     if x < 0:
         return False
-    elif x < 9:
-        return True
-    reversed_number_list = [i for i in str(x)[::-1]]
-    reversed_number = int(''.join(reversed_number_list))
-    if reversed_number == x:
-        return True
-    else:
-        return False
+    reversed_number = int((str(x)[::-1]))
+    return reversed_number == x
 
 
 class TestPalindromeCheck(unittest.TestCase):
