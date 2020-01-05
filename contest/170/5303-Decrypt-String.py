@@ -4,6 +4,20 @@ import unittest
 def freqAlphabets(s: str) -> str:
     import string
     alpha_map = dict(zip(range(1, 27), string.ascii_lowercase))
+    len_s, out_string, i = len(s), "", 0
+    while i < len_s:
+        if i+2 < len_s and s[i+2] == "#":
+            out_string += alpha_map[int(s[i] + s[i+1])]
+            i += 3
+        else:
+            out_string += alpha_map[int(s[i])]
+            i += 1
+    return out_string
+
+
+def freqAlphabetsGross(s: str) -> str:
+    import string
+    alpha_map = dict(zip(range(1, 27), string.ascii_lowercase))
     tmp_number, out_string = "", ""
     for pos, char in enumerate(s):
         if char == "#" or char == 0:
