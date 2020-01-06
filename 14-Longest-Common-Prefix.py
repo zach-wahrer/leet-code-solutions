@@ -17,7 +17,7 @@ class TestPrefix(unittest.TestCase):
         output = "fl"
         self.assertEqual(input, output)
 
-    def test_none(self):
+    def test_none_0(self):
         input = find_prefix(["dog"], ["racecar"], ["car"])
         output = ""
         self.assertEqual(input, output)
@@ -35,4 +35,9 @@ class TestPrefix(unittest.TestCase):
     def test_z(self):
         input = find_prefix(["zach"], ["zebra"], ["zoot"], ["zoo"])
         output = "z"
+        self.assertEqual(input, output)
+
+    def test_none_1(self):
+        input = find_prefix(["hi"], ["hello"], ["hey"], ["bye"])
+        output = ""
         self.assertEqual(input, output)
