@@ -6,30 +6,35 @@ Psudocode:
     For xor function, get range from query
     If > 2, loop through, doing xor each time
     Else, just do xor
+
+    Refactor:
+        Only pass needed numbers into xor_math to speed things up
 '''
 
 import unittest
 
 
 def xor_query(arr: list, queries: list) -> list:
+    numbers = arr
     results = list()
     for query in queries:
-        results.append(xor_math(arr, query))
+        number_range = query[1] - query[0]
+        if number_range == 0:
+            results.append(numbers[query[0]])
+        elif number_range == 1:
+            results.append(numbers[query[0]] ^ numbers[query[1]])
+        else:
+            range_values = list()
+            for i in range(query[0], query[1] + 1):
+                range_values.append(numbers[i])
+            results.append(range_xor_math(range_values))
     return results
 
 
-def xor_math(numbers: list, query: list) -> int:
-    # Range == 0
-    if query[0] == query[1]:
-        return numbers[query[0]]
-    # Range == 1
-    posistion = query[0]
-    result = numbers[posistion] ^ numbers[posistion + 1]
-    posistion += 2
-    # Range > 1
-    while posistion <= query[1]:
-        result = result ^ numbers[posistion]
-        posistion += 1
+def range_xor_math(numbers: list) -> int:
+    result = 0
+    for number in numbers:
+        result = result ^ number
     return result
 
 
