@@ -12,7 +12,25 @@ import unittest
 
 
 def xor_query(arr: list, queries: list) -> list:
-    pass
+    results = list()
+    for query in queries:
+        results.append(xor_math(arr, query))
+    return results
+
+
+def xor_math(numbers: list, query: list) -> int:
+    # Range == 0
+    if query[0] == query[1]:
+        return numbers[query[0]]
+    # Range == 1
+    posistion = query[0]
+    result = numbers[posistion] ^ numbers[posistion + 1]
+    posistion += 2
+    # Range > 1
+    while posistion <= query[1]:
+        result = result ^ numbers[posistion]
+        posistion += 1
+    return result
 
 
 class XorTest(unittest.TestCase):
