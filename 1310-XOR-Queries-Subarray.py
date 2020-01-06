@@ -24,18 +24,11 @@ def xor_query(arr: list, queries: list) -> list:
         elif number_range == 1:
             results.append(numbers[query[0]] ^ numbers[query[1]])
         else:
-            range_values = list()
+            result = 0
             for i in range(query[0], query[1] + 1):
-                range_values.append(numbers[i])
-            results.append(range_xor_math(range_values))
+                result = result ^ numbers[i]
+            results.append(result)
     return results
-
-
-def range_xor_math(numbers: list) -> int:
-    result = 0
-    for number in numbers:
-        result = result ^ number
-    return result
 
 
 class XorTest(unittest.TestCase):
