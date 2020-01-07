@@ -25,9 +25,7 @@ def valid_paren(s: str) -> bool:
         if char in open_chars:
             stack.append(char)
         else:
-            if stack == []:
-                return False
-            if open_chars[stack[-1]] == char:
+            if stack and open_chars[stack[-1]] == char:
                 stack.pop()
             else:
                 return False
