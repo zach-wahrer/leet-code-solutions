@@ -21,4 +21,10 @@ class ListNode:
         current_node = self
         while current_node.next:
             current_node = self.next
-        current.next = ListNode(new_val)
+        current_node.next = ListNode(new_val)
+
+    def build(values: list):
+        head = ListNode(values[0])
+        for value in values[1:]:
+            head.add(value)
+        return head
