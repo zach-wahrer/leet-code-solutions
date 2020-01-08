@@ -9,20 +9,7 @@ Psudocode:
 '''
 
 import unittest
-
-
-class ListNode:
-    def __init__(self, val):
-        self.val = val
-        self.next = None
-
-    def add(self, new_val):
-        if self.next is None:
-            self.next = ListNode(new_val)
-        else:
-            self.next.add(new_val)
-        return self
-
+from models.linkedList import *
 
 def output_sum(l1: ListNode, l2: ListNode) -> ListNode:
     sum = add_linked_lists(l1, l2)
