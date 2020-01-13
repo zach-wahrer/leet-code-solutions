@@ -14,6 +14,9 @@ class ListNode:
             return self.__dict__ == other.__dict__
         return False
 
+    def __ne__(self, other):
+        return not self.__eq__(other)
+
     def add(self, new_val):
         if self.val is None:
             self.val = new_val
