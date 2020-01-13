@@ -29,5 +29,30 @@ class TestLinkedList(unittest.TestCase):
         self.assertEqual(input, output)
 
 
+class TestLinkedListHelpers(unittest.TestCase):
+
+    def test_to_set(self):
+        input = [1, 'a', 2, 'x', 'x']
+        linked_list = ListNode.build(input)
+        output = linked_list.to_set()
+        self.assertEqual({1, 'a', 2, 'x'}, output)
+
+    def test_length(self):
+        input = [1, 1000, 8, 9, 'abba']
+        linked_list = ListNode.build(input)
+        output = linked_list.length()
+        self.assertEqual(5, output)
+
+    def test_all_unique_false(self):
+        input = [5, 6, 7, 8, 'z', 8]
+        linked_list = ListNode.build(input)
+        self.assertFalse(linked_list.all_unique())
+
+    def test_all_unique_true(self):
+        input = ['a', 'b', 'c', 'aa', 11, 1]
+        linked_list = ListNode.build(input)
+        self.assertTrue(linked_list.all_unique())
+
+
 if __name__ == "__main__":
     unittest.main()
