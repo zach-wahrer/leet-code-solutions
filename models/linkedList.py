@@ -9,6 +9,11 @@ class ListNode:
         self.val = val
         self.next = None
 
+    def __eq__(self, other):
+        if isinstance(other, self.__class__):
+            return self.__dict__ == other.__dict__
+        return False
+
     def add(self, new_val):
         if self.val is None:
             self.val = new_val
