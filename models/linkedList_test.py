@@ -28,25 +28,27 @@ class TestLinkedList(unittest.TestCase):
         output = linked_list.to_list()
         self.assertEqual(input, output)
 
-    def test_compare_longer_array_true(self):
-        input = [8, 'a', 9, 'r', 777, 8.3]
+    def test_longer_equality(self):
+        input = [1, 2, 'b', 8, 'xyz', 3.14]
         linked_list = ListNode.build(input)
-        self.assertTrue(linked_list.to_list() == input)
+        linked_list2 = ListNode.build(input)
+        self.assertEqual(linked_list, linked_list2)
 
-    def test_compare_longer_array_false(self):
-        input = [8, 'a', 9, 'r', 777, 8.3]
+    def test_longer_inequality(self):
+        input = [1, 2, 'b', 8, 'xyz', 3.14]
         linked_list = ListNode.build(input)
-        self.assertFalse(linked_list.to_list() == input[0:5])
+        linked_list2 = ListNode.build(input[0:1])
+        self.assertNotEqual(linked_list, linked_list2)
 
     def test_empty_input_array(self):
         linked_list = ListNode.build([])
         output = ListNode(None)
-        self.assertTrue(linked_list.to_list() == output.to_list())
+        self.assertEqual(linked_list, output)
 
     def test_empty_input_array_with_non_empty(self):
         linked_list = ListNode.build([1, 2, 3])
         output = ListNode(None)
-        self.assertFalse(linked_list.to_list() == output.to_list())
+        self.assertNotEqual(linked_list, output)
 
     def test_add_to_empty_ListNode_replaces_empty_node(self):
         nil_node = ListNode(None)
