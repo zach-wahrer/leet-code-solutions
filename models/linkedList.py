@@ -28,3 +28,11 @@ class ListNode:
         for value in values[1:]:
             head.add(value)
         return head
+
+    def to_list(self) -> list:
+        values = list()
+        head = self
+        while head:
+            values.append(head.val)
+            head = head.next
+        return values
