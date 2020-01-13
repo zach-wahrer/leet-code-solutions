@@ -10,7 +10,9 @@ class ListNode:
         self.next = None
 
     def add(self, new_val):
-        if self.next is None:
+        if self.val is None:
+            self.val = new_val
+        elif self.next is None:
             self.next = ListNode(new_val)
         else:
             self.next.add(new_val)
@@ -28,9 +30,12 @@ class ListNode:
         return len(values) == len(set(values))
 
     def build(values: list):
-        head = ListNode(values[0])
-        for value in values[1:]:
-            head.add(value)
+        if values:
+            head = ListNode(values[0])
+            for value in values[1:]:
+                head.add(value)
+        else:
+            head = ListNode(None)
         return head
 
     def length(self) -> int:
