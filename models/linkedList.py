@@ -49,6 +49,18 @@ class ListNode:
     def length(self) -> int:
         return len(self.to_list())
 
+    def check_for_circular(self) -> bool:
+        move_one = self
+        move_two = self.next.next
+        while True:
+            if not move_one or not move_two:
+                return False
+            elif move_one == move_two:
+                return True
+            else:
+                move_one = move_one.next
+                move_two = move_two.next.next
+
     def to_list(self) -> list:
         values = list()
         head = self
