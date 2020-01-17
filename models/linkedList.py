@@ -60,6 +60,8 @@ class ListNode:
 
     def is_circular(self) -> bool:
         move_one = self
+        if self.next is None:  # Check for single node
+            return False
         move_two = self.next.next
         while True:
             if not move_one or not move_two:
@@ -68,6 +70,9 @@ class ListNode:
                 return True
             else:
                 move_one = move_one.next
+                # Don't run off the end of odd numbered, non-circular lists
+                if not move_two.next:
+                    return False
                 move_two = move_two.next.next
 
     def to_list(self) -> list:
