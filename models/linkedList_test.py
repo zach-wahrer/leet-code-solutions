@@ -81,6 +81,10 @@ class TestLinkedListHelpers(unittest.TestCase):
         linked_list = ListNode.build(input)
         self.assertTrue(linked_list.all_unique())
 
+    def test_no_to_list_when_circular(self):
+        head = ListNode.build_circular([i for i in range(21)])
+        self.assertFalse(head.to_list())
+
     def test_is_circular_true(self):
         head = ListNode.build_circular([i for i in range(666)])
         self.assertTrue(head.is_circular())

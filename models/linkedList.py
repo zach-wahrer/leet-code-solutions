@@ -78,6 +78,8 @@ class ListNode:
     def to_list(self) -> list:
         values = list()
         head = self
+        if head.is_circular():
+            return False
         while head:
             values.append(head.val)
             head = head.next
