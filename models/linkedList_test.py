@@ -89,9 +89,9 @@ class TestLinkedListHelpers(unittest.TestCase):
         head = ListNode.build([i for i in range(7)])
         self.assertFalse(head.is_circular())
 
-        def test_is_circular_false_even(self):
-            head = ListNode.build([i for i in range(10)])
-            self.assertFalse(head.is_circular())
+    def test_is_circular_false_even(self):
+        head = ListNode.build([i for i in range(10)])
+        self.assertFalse(head.is_circular())
 
     def test_is_circular_one_node(self):
         head = ListNode.build([1])
