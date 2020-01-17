@@ -46,10 +46,19 @@ class ListNode:
             head = ListNode(None)
         return head
 
+    def build_loop(values: list):
+        head = ListNode.build(values)
+        first_node = head
+        while head:
+            if head.next is None:
+                head.next = first_node
+                return first_node
+            head = head.next
+
     def length(self) -> int:
         return len(self.to_list())
 
-    def check_for_circular(self) -> bool:
+    def is_circular(self) -> bool:
         move_one = self
         move_two = self.next.next
         while True:
