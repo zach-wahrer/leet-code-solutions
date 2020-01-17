@@ -46,7 +46,7 @@ class ListNode:
             head = ListNode(None)
         return head
 
-    def build_loop(values: list):
+    def build_circular(values: list):
         head = ListNode.build(values)
         first_node = head
         while head:
