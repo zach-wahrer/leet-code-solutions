@@ -19,18 +19,25 @@ def merge_sorted_lists(l1: ListNode, l2: ListNode) -> ListNode:
         return output
 
     def to_linked_list(values: list) -> ListNode:
-        head = ListNode(values[0])
-        current_node = head
-        for i in values[1:]:
-            current_node.next = ListNode(i)
-            current_node = current_node.next
-        return head
+        if values:
+            head = ListNode(values[0])
+            current_node = head
+            for i in values[1:]:
+                current_node.next = ListNode(i)
+                current_node = current_node.next
+            return head
+        else:
+            return None
 
     linked_list_values = list()
     for i in to_list(l1) + to_list(l2):
-        linked_list_values.append(i)
-    linked_list_values.sort()
-    return to_linked_list(linked_list_values)
+        if i is not None:
+            linked_list_values.append(i)
+    if linked_list_values != []:
+        linked_list_values.sort()
+        return to_linked_list(linked_list_values)
+    else:
+        return ListNode('')
 
 
 class TestListMerge(unittest.TestCase):
@@ -61,6 +68,20 @@ class TestListMerge(unittest.TestCase):
         list2 = ListNode.build([-99, 4, 32])
         input = merge_sorted_lists(list1, list2)
         output = ListNode.build([-99, 1, 2, 3, 4, 4, 32])
+        self.assertEqual(input, output)
+
+    def test_blank_list(self):
+        list1 = ListNode.build([])
+        list2 = ListNode.build([1, 2, 3])
+        input = merge_sorted_lists(list1, list2)
+        output = ListNode.build([1, 2, 3])
+        self.assertEqual(input, output)
+
+    def test_blank_lists(self):
+        list1 = ListNode.build([])
+        list2 = ListNode.build([])
+        input = merge_sorted_lists(list1, list2)
+        output = ListNode('')
         self.assertEqual(input, output)
 
 
