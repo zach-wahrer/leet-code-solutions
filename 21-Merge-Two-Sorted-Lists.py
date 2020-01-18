@@ -10,7 +10,27 @@ from models.linkedList import ListNode
 
 
 def merge_sorted_lists(l1: ListNode, l2: ListNode) -> ListNode:
-    pass
+
+    def to_list(head: ListNode) -> list:
+        output = list()
+        while head:
+            output.append(head.val)
+            head = head.next
+        return output
+
+    def to_linked_list(values: list) -> ListNode:
+        head = ListNode(values[0])
+        current_node = head
+        for i in values[1:]:
+            current_node.next = ListNode(i)
+            current_node = current_node.next
+        return head
+
+    linked_list_values = list()
+    for i in to_list(l1) + to_list(l2):
+        linked_list_values.append(i)
+    linked_list_values.sort()
+    return to_linked_list(linked_list_values)
 
 
 class TestListMerge(unittest.TestCase):
