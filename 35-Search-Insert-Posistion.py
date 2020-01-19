@@ -11,15 +11,15 @@ import unittest
 
 
 def search_input_pos(nums: list, target: int) -> int:
-    if target in nums:
-        return nums.index(target)
-    elif target < nums[0]:
+    if target < nums[0]:
         return 0
     elif target > nums[-1]:
         return len(nums)
     else:
         for pos, i in enumerate(nums):
-            if i < target and nums[pos + 1] > target:
+            if i == target:
+                return pos
+            elif i < target and nums[pos + 1] > target:
                 return pos + 1
 
 
