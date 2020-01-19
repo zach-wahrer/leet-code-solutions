@@ -1,13 +1,26 @@
 '''
 Psudocode:
-
+    Use list.index() to find value
+    If not found, iterate through list, comparing
+        If value is less than first value, return 0
+        If value is > current value, but < next value, return next index
+        If it is greater than final value, return n+1
 '''
 
 import unittest
 
 
 def search_input_pos(nums: list, target: int) -> int:
-    pass
+    if target in nums:
+        return nums.index(target)
+    elif target < nums[0]:
+        return 0
+    elif target > nums[-1]:
+        return len(nums)
+    else:
+        for pos, i in enumerate(nums):
+            if i < target and nums[pos + 1] > target:
+                return pos + 1
 
 
 class TestPosistion(unittest.TestCase):
@@ -28,7 +41,7 @@ class TestPosistion(unittest.TestCase):
         self.assertEqual(input, output)
 
     def test_1356_0(self):
-        input = search_input_pos([1, 3, 5, 6], 7)
+        input = search_input_pos([1, 3, 5, 6], 0)
         output = 0
         self.assertEqual(input, output)
 
