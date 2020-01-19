@@ -32,6 +32,11 @@ class TestPosistion(unittest.TestCase):
         output = 0
         self.assertEqual(input, output)
 
+    def test_minus13560_1(self):
+        input = search_input_pos([-6, -5, -3, -1, 0], 1)
+        output = 5
+        self.assertEqual(input, output)
+
 
 if __name__ == "__main__":
     unittest.main()
