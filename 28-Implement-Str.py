@@ -1,13 +1,16 @@
 '''
 Psudocode:
-
+    Check for empty substring, if so, return 0
+    return str.find(substring)
 '''
 
 import unittest
 
 
 def find_substring(haystack: str, needle: str) -> int:
-    pass
+    if needle is None:
+        return 0
+    return haystack.find(needle)
 
 
 class TestSubstring(unittest.TestCase):
