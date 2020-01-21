@@ -1,13 +1,22 @@
 '''
 Psudocode:
-
+    Convert list to a string, then int
+    Add 1
+    Convert int to string, then split to list
 '''
 
 import unittest
 
 
 def plus_one(digits: list) -> list:
-    pass
+    number = ""
+    for digit in digits:
+        number += str(digit)
+    number = int(number) + 1
+    out_list = []
+    for digit in str(number):
+        out_list.append(int(digit))
+    return out_list
 
 
 class TestPlusOne(unittest.TestCase):
@@ -33,5 +42,5 @@ class TestPlusOne(unittest.TestCase):
         self.assertEqual(input, output)
 
 
-if __name__ == "main":
+if __name__ == "__main__":
     unittest.main()
