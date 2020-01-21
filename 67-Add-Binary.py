@@ -1,13 +1,15 @@
 '''
 Psudocode:
-
+    Add both nums as bin()
+    Output as str
 '''
 
 import unittest
 
 
 def add_binary_nums(a: str, b: str) -> str:
-    pass
+    value = bin(int(a, 2) + int(b, 2))
+    return value[2:]
 
 
 class TestAddBinary(unittest.TestCase):
