@@ -8,7 +8,8 @@ import math
 
 
 def square_root(x: int) -> int:
-    return int(math.sqrt(x))
+    return int(x ** 0.5)
+    # return int(math.sqrt(x))
 
 
 class TestSquareRoot(unittest.TestCase):
