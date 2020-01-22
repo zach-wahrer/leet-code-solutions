@@ -4,10 +4,11 @@ Psudocode:
 '''
 
 import unittest
+import math
 
 
 def square_root(x: int) -> int:
-    pass
+    return int(math.sqrt(x))
 
 
 class TestSquareRoot(unittest.TestCase):
