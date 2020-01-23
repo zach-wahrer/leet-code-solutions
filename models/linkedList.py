@@ -23,13 +23,6 @@ class ListNode:
             yield current.val
             current = current.next
 
-    # def __next__(self):
-    #     if self.next is not None:
-    #         value = self.val
-    #         self = self.next
-    #         return value
-    #     raise StopIteration
-
     def add(self, new_val):
         if self.val is None:
             self.val = new_val
