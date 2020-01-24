@@ -8,7 +8,7 @@ Loop through list
 import unittest
 
 
-def what_is_missing(nums: list) -> int:
+def what_is_missing_list(nums: list) -> int:
     nums.sort()
     if nums[0] != 0:
         return 0
@@ -17,6 +17,13 @@ def what_is_missing(nums: list) -> int:
             return num + 1
         elif nums[i + 1] != num + 1:
             return num + 1
+
+
+def what_is_missing(nums: list) -> int:
+    num_set = set(nums)
+    for i in range(len(nums) + 1):
+        if i not in num_set:
+            return i
 
 
 class TestMissing(unittest.TestCase):
