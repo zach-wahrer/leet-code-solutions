@@ -23,8 +23,18 @@ def contains_duplicate_sort(nums: list) -> bool:
     return False
 
 
-def contains_duplicate(nums: list) -> bool:
+def contains_duplicate_set(nums: list) -> bool:
     return len(nums) != len(set(nums))
+
+
+def contains_duplicate(nums: list) -> bool:
+    hash = {}
+    for i in nums:
+        if i not in hash:
+            hash[i] = 0
+        else:
+            return True
+    return False
 
 
 class TestDuplicate(unittest.TestCase):
