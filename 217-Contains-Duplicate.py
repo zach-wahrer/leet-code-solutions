@@ -28,6 +28,7 @@ def contains_duplicate_set(nums: list) -> bool:
 
 
 def contains_duplicate(nums: list) -> bool:
+    nums.sort()
     hash = {}
     for i in nums:
         if i not in hash:
