@@ -19,11 +19,19 @@ def what_is_missing_list(nums: list) -> int:
             return num + 1
 
 
-def what_is_missing(nums: list) -> int:
+def what_is_missing_set(nums: list) -> int:
     num_set = set(nums)
     for i in range(len(nums) + 1):
         if i not in num_set:
             return i
+
+
+def what_is_missing(nums: list) -> int:
+    sum_list = sum(nums)
+    list_val = 0
+    for i in range(len(nums) + 1):
+        list_val += i
+    return list_val - sum_list
 
 
 class TestMissing(unittest.TestCase):
