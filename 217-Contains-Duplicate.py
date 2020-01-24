@@ -8,7 +8,10 @@ import unittest
 
 
 def contains_duplicate(nums: list) -> bool:
-    pass
+    for i in nums:
+        if nums.count(i) > 1:
+            return True
+    return False
 
 
 class TestDuplicate(unittest.TestCase):
@@ -41,3 +44,7 @@ class TestDuplicate(unittest.TestCase):
         input = contains_duplicate([0, 1, 5, 11])
         output = False
         self.assertEqual(input, output)
+
+
+if __name__ == "__main__":
+    unittest.main()
