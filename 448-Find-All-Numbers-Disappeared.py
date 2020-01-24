@@ -9,10 +9,11 @@ Psudocode:
 import unittest
 
 
-def find_missing_nums(nums: list) -> list:
+def find_missing_nums_set_timeout(nums: list) -> list:
     missing_numbers = []
+    num_set = set(nums)
     for i in range(1, len(nums) + 1):
-        if i not in set(nums):
+        if i not in num_set:
             missing_numbers.append(i)
     return missing_numbers
 
