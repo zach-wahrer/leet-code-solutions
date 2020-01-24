@@ -14,13 +14,17 @@ def contains_duplicate_linear(nums: list) -> bool:
     return False
 
 
-def contains_duplicate(nums: list) -> bool:
+def contains_duplicate_sort(nums: list) -> bool:
     nums.sort()
     for i, val in enumerate(nums):
         if i < len(nums) - 1:
             if val == nums[i + 1]:
                 return True
     return False
+
+
+def contains_duplicate(nums: list) -> bool:
+    return len(nums) != len(set(nums))
 
 
 class TestDuplicate(unittest.TestCase):
