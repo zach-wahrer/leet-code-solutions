@@ -7,10 +7,19 @@ Psudocode:
 import unittest
 
 
-def contains_duplicate(nums: list) -> bool:
+def contains_duplicate_linear(nums: list) -> bool:
     for i in nums:
         if nums.count(i) > 1:
             return True
+    return False
+
+
+def contains_duplicate(nums: list) -> bool:
+    nums.sort()
+    for i, val in enumerate(nums):
+        if i < len(nums) - 1:
+            if val == nums[i + 1]:
+                return True
     return False
 
 
