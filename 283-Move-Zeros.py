@@ -10,11 +10,40 @@ import unittest
 
 
 # O(n^2) - Fails some cases
+def move_zeros_brute(nums: list) -> None:
+    for i in nums:
+        if i == 0:
+            nums.remove(i)
+            nums.append(i)
+    return nums
+
+
+# O(n)
 def move_zeros(nums: list) -> None:
-    for i, num in enumerate(nums):
-        if num == 0:
-            nums.pop(i)
-            nums.append(0)
+    # Length 2 edge case
+    if len(nums) == 2:
+        if nums[0] == 0:
+            nums[0] = nums[1]
+            nums[1] = 0
+
+    pointer1 = 0
+    pointer2 = 1
+    while pointer2 < len(nums) - 1:
+        if nums[pointer1] == 0:
+            while nums[pointer2] == 0:
+                pointer2 += 1
+                if pointer2 == len(nums) - 1:
+                    break
+            nums[pointer1] = nums[pointer2]
+            nums[pointer2] = 0
+        else:
+            pointer2 += 1
+        pointer1 += 1
+    # Length of 3 edge cases
+    if len(nums) > 2 and nums[pointer1] == 0:
+        nums[pointer1] = nums[pointer2]
+        nums[pointer2] = 0
+
     return nums
 
 
@@ -32,10 +61,10 @@ class TestMoveZeros(unittest.TestCase):
 
     def test_01(self):
         input = move_zeros([0, 1])
-        output = [0, 1]
+        output = [1, 0]
         self.assertEqual(input, output)
 
-    def test_01(self):
+    def test_1(self):
         input = move_zeros([1])
         output = [1]
         self.assertEqual(input, output)
@@ -58,6 +87,21 @@ class TestMoveZeros(unittest.TestCase):
     def test_0001(self):
         input = move_zeros([0, 0, 0, 1])
         output = [1, 0, 0, 0]
+        self.assertEqual(input, output)
+
+    def test_101(self):
+        input = move_zeros([1, 0, 1])
+        output = [1, 1, 0]
+        self.assertEqual(input, output)
+
+    def test_111(self):
+        input = move_zeros([1, 1, 1])
+        output = [1, 1, 1]
+        self.assertEqual(input, output)
+
+    def test_011(self):
+        input = move_zeros([0, 1, 1])
+        output = [1, 1, 0]
         self.assertEqual(input, output)
 
 
