@@ -6,11 +6,26 @@ Psudocode:
 import unittest
 
 
-# Brute O(n^2)
-def rotate_array(nums: list, k: int) -> None:
+# Brute O(n*k)
+def rotate_array_brute(nums: list, k: int) -> None:
     for i in range(k):
         nums.insert(0, nums[-1])
         nums.pop(-1)
+    return nums
+
+
+# O(n) solution
+def rotate_array(nums: list, k: int) -> None:
+    if k > 0:
+        k %= len(nums)
+    if k != 0:
+        move_group_size = len(nums) - k
+        new_left = nums[move_group_size:]
+        new_right = nums[:move_group_size]
+        for i, num in enumerate(new_left):
+            nums[i] = num
+        for i, num in enumerate(new_right):
+            nums[i + k] = num
     return nums
 
 
@@ -22,8 +37,8 @@ class TestRotateArray(unittest.TestCase):
         self.assertEqual(input, output)
 
     def test_12_1(self):
-        input = rotate_array([1, 2], 1)
-        output = [2, 1]
+        input = rotate_array([1, 2], 2)
+        output = [1, 2]
         self.assertEqual(input, output)
 
     def test_1_1(self):
@@ -44,6 +59,11 @@ class TestRotateArray(unittest.TestCase):
     def test_negatives(self):
         input = rotate_array([-1, -100, 3, 99], 2)
         output = [3, 99, -1, -100]
+        self.assertEqual(input, output)
+
+    def test_k_bigger_than_len(self):
+        input = rotate_array([3, 4, 3], 6)
+        output = [3, 4, 3]
         self.assertEqual(input, output)
 
 
