@@ -1,15 +1,66 @@
 import unittest
 
 
+# O(log n) time, O(1) space
+# Doesn't work correctly
+def binary_search_invalid(nums: list, target: int) -> int:
+    start = 0
+    finish = len(nums) - 1
+    middle = int(finish / 2)
+
+    if finish == 0:
+        if nums[0] == target:
+            return 0
+        return -1
+
+    end_check = 0
+    while True:
+        if nums[middle] == target:
+            return middle
+        elif nums[middle] < target:
+            start = middle + 1
+            middle = start + (finish - start) // 2
+        else:
+            middle = start + (middle - 1) // 2
+        if end_check == middle:
+            return -1
+        end_check = middle
+
+
+# O(log n) time, O(1) space
 def binary_search(nums: list, target: int) -> int:
-    pass
+    start = 0
+    end = len(nums) - 1
+    middle = end // 2
+    end_check = None
+
+    while True:
+        if nums[middle] == target:
+            return middle
+        elif nums[middle] < target:
+            start = middle + 1
+            middle = start + (end - start) // 2
+        else:
+            end = middle - 1
+            middle = start + (end - start) // 2
+        if end_check == middle:
+            return -1
+        end_check = middle
 
 
 class TestBinarySearch(unittest.TestCase):
 
-    def test_list_value_found(self):
+    def test_list_value_found_end(self):
         input = binary_search([-1, 0, 3, 5, 9, 12], 9)
         self.assertEqual(input, 4)
+
+    def test_list_value_found_end2(self):
+        input = binary_search([-1, 0, 3, 5, 9, 12, 13], 13)
+        self.assertEqual(input, 6)
+
+    def test_list_value_found_beginning(self):
+        input = binary_search([-1, 0, 3, 5, 9, 12], 0)
+        self.assertEqual(input, 1)
 
     def test_list_value_not_found(self):
         input = binary_search([-1, 0, 3, 5, 9, 12], 2)
