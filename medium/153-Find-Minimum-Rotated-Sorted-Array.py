@@ -26,7 +26,7 @@ def find_min_two_pointer(nums: list) -> int:
 
 
 # Binary Search O(log n) solution
-def find_min(nums: list) -> int:
+def find_min_binary_search(nums: list) -> int:
     if not nums:
         return None
     if len(nums) == 1:
@@ -40,16 +40,12 @@ def find_min(nums: list) -> int:
     middle = get_middle(start, end)
 
     while True:
-        if start > end:
+        if start > end or not middle < len(nums) - 1:
             return nums[0]
-
         if nums[middle - 1] > nums[middle]:
             return nums[middle]
-        if middle < len(nums) - 1:
-            if nums[middle + 1] < nums[middle]:
-                return nums[middle + 1]
-        else:
-            return nums[0]
+        if nums[middle + 1] < nums[middle]:
+            return nums[middle + 1]
 
         if nums[middle] > nums[start]:
             start = middle + 1
@@ -57,6 +53,35 @@ def find_min(nums: list) -> int:
         else:
             end = middle - 1
             middle = get_middle(start, end)
+
+
+# Recursive Binary Search O(log n) solution
+def find_min(nums: list) -> int:
+    if not nums:
+        return None
+    if len(nums) == 1:
+        return nums[0]
+
+    def get_middle(start: int, end: int) -> int:
+        return (start + end) // 2
+
+    def _find_min(start, end):
+        middle = get_middle(start, end)
+
+        # exit case
+        if start > end or not middle < len(nums) - 1:
+            return nums[0]
+        if nums[middle - 1] > nums[middle]:
+            return nums[middle]
+        if nums[middle + 1] < nums[middle]:
+            return nums[middle + 1]
+
+        if nums[middle] > nums[start]:  # action logic
+            return _find_min(middle + 1, end)  # magic happens here
+        else:  # default action logic
+            return _find_min(start, middle - 1)
+
+    return _find_min(0, len(nums)-1)
 
 
 class TestMinimumRotatedSortedArray(unittest.TestCase):
