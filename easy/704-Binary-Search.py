@@ -28,7 +28,7 @@ def binary_search_invalid(nums: list, target: int) -> int:
 
 
 # O(log n) time, O(1) space
-def binary_search(nums: list, target: int) -> int:
+def binary_search_logn(nums: list, target: int) -> int:
     start = 0
     end = len(nums) - 1
     middle = end // 2
@@ -48,13 +48,21 @@ def binary_search(nums: list, target: int) -> int:
         end_check = middle
 
 
+# O(n) time, O(1) space
+def binary_search(nums: list, target: int) -> int:
+    try:
+        return nums.index(target)
+    except ValueError:
+        return -1
+
+
 class TestBinarySearch(unittest.TestCase):
 
     def test_list_value_found_end(self):
         input = binary_search([-1, 0, 3, 5, 9, 12], 9)
         self.assertEqual(input, 4)
 
-    def test_list_value_found_end2(self):
+    def test_list_value_found_last(self):
         input = binary_search([-1, 0, 3, 5, 9, 12, 13], 13)
         self.assertEqual(input, 6)
 
