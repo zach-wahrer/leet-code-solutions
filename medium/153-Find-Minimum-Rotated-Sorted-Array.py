@@ -1,8 +1,12 @@
 import unittest
 
 
+# Naive O(n) solution
 def find_min(nums: list) -> int:
-    pass
+    try:
+        return min(nums)
+    except ValueError:
+        return None
 
 
 class TestMinimumRotatedSortedArray(unittest.TestCase):
