@@ -1,18 +1,22 @@
 import unittest
 
 
-def search_pos_rotated_array(nums: list, target: int) -> int:
-    pass
+# Naive solution O(n) time, O(1) space
+def search_pos_rotated_array_naive(nums: list, target: int) -> int:
+    try:
+        return nums.index(target)
+    except ValueError:
+        return -1
 
 
 class SearchRotatedSortedArray(unittest.TestCase):
 
     def test_4567012_0_found(self):
-        input = search_pos_rotated_array([4, 5, 6, 7, 0, 1, 2, 3], 0)
+        input = search_pos_rotated_array([4, 5, 6, 7, 0, 1, 2], 0)
         self.assertEqual(input, 4)
 
     def test_4567012_3_not_found(self):
-        input = search_pos_rotated_array([4, 5, 6, 7, 0, 1, 2, 3], 3)
+        input = search_pos_rotated_array([4, 5, 6, 7, 0, 1, 2], 3)
         self.assertEqual(input, -1)
 
     def test_len_1_found(self):
