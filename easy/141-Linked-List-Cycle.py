@@ -1,9 +1,25 @@
 from models.linkedList import ListNode
 import unittest
 
+# Slow/Fast pointer solution, O(n) time, O(1) space
+
 
 def has_cycle(head: ListNode) -> bool:
-    pass
+    if head and head.next:
+        fast = head.next
+    else:
+        return False
+    slow = head
+    while fast is not None:
+        if slow == fast:
+            return True
+        slow = slow.next
+        if fast.next and fast.next.next:
+            fast = fast.next.next
+        else:
+            return False
+
+    return False
 
 
 class TestLinkedListCycle(unittest.TestCase):
