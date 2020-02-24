@@ -14,7 +14,7 @@ def valid_palindrome_brute(s: str) -> bool:
 
 
 # O(n) Two pointer
-def valid_palindrome(s: str) -> bool:
+def valid_palindrome_two_pointer(s: str) -> bool:
     # Start from either end, comparing string
     # To lower each char
     # Skip non-alpha chars and spaces
@@ -37,6 +37,28 @@ def valid_palindrome(s: str) -> bool:
         rp -= 1
         if lp >= rp:
             return True
+
+
+# O(n) Deque
+def valid_palindrome(s: str) -> bool:
+    if s == "" or len(s) == 1:
+        return True
+
+    from collections import deque
+
+    string_deque = deque()
+
+    for char in s:
+        if char.isalnum():
+            string_deque.append(char.lower())
+
+    while len(string_deque) > 1:
+        if string_deque.pop() != string_deque.popleft():
+            return False
+        if len(string_deque) == 0:
+            return True
+
+    return True
 
 
 class TestPalindrome(unittest.TestCase):
