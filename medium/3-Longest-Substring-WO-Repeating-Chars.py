@@ -49,7 +49,7 @@ def longest_sub_recursive(s: str) -> int:
 
 
 # Deque solution WORKS!!! O(n**2) solution, O(n) space
-def longest_sub_quadradic(s: str) -> int:
+def longest_sub(s: str) -> int:
 
     if len(s) < 2:
         return len(s)
@@ -78,7 +78,7 @@ def longest_sub_quadradic(s: str) -> int:
 
 
 # Deque solution with set lookups WORKS!!! O(n) solution, O(n) space
-def longest_sub(s: str) -> int:
+def longest_sub_linear(s: str) -> int:
 
     if len(s) < 2:
         return len(s)
@@ -109,6 +109,25 @@ def longest_sub(s: str) -> int:
         counts.append(len(char_deque))
 
     return max(counts)
+
+
+# Sliding window from a solution on LeetCode
+def longest_sub_leet(s: str) -> int:
+    if len(s) < 2:
+        return len(s)
+    uniques = set()
+
+    pos = 0
+    current_max = 0
+
+    for i in range(len(s)):
+        while pos < len(s) and s[pos] not in uniques:
+            uniques.add(s[pos])
+            pos += 1
+        current_max = max(current_max, len(uniques))
+        uniques.remove(s[i])
+
+    return current_max
 
 
 class TestLongestSubstring(unittest.TestCase):
