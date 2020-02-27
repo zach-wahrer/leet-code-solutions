@@ -48,8 +48,8 @@ def longest_sub_recursive(s: str) -> int:
     return max(counts)
 
 
-# Deque solution
-def longest_sub(s: str) -> int:
+# Deque solution WORKS!!! O(n**2) solution, O(n) space
+def longest_sub_quadradic(s: str) -> int:
 
     if len(s) < 2:
         return len(s)
@@ -70,6 +70,40 @@ def longest_sub(s: str) -> int:
             char_deque.append(char)
         else:
             char_deque.append(char)
+
+    if char_deque:
+        counts.append(len(char_deque))
+
+    return max(counts)
+
+
+# Deque solution with set lookups WORKS!!! O(n) solution, O(n) space
+def longest_sub(s: str) -> int:
+
+    if len(s) < 2:
+        return len(s)
+
+    def catalog(item, char_deque, lookup_set):
+        char_deque.append(item)
+        lookup_set.add(item)
+
+    char_deque = deque()
+    lookup = set()
+    catalog(s[0], char_deque, lookup)
+    counts = [0]
+
+    for char in s[1:]:
+        if char == char_deque[0]:
+            counts.append(len(char_deque))
+            char_deque.popleft()
+            catalog(char, char_deque, lookup)
+        elif char in lookup:
+            counts.append(len(char_deque))
+            for i in range(char_deque.index(char) + 1):
+                lookup.remove(char_deque.popleft())
+            catalog(char, char_deque, lookup)
+        else:
+            catalog(char, char_deque, lookup)
 
     if char_deque:
         counts.append(len(char_deque))
