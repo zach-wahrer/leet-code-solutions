@@ -3,16 +3,16 @@ import unittest
 
 # O(n) time and O(1) space solution
 def max_subarray(nums: list) -> int:
-    max_ending_here = 0
-    max_so_far = 0
 
-    for i in nums:
-        max_ending_here += i
-        if max_ending_here < 0:
-            max_ending_here = 0
-        if max_so_far < max_ending_here:
-            max_so_far = max_ending_here
-    return max_so_far
+    tmp_sum = nums[0]
+    max_sum = nums[0]
+
+    for i in nums[1:]:
+        tmp_sum = max(tmp_sum + i, i)
+        if tmp_sum > max_sum:
+            max_sum = tmp_sum
+
+    return max_sum
 
 
 class TestMaxSubarray(unittest.TestCase):
@@ -28,6 +28,12 @@ class TestMaxSubarray(unittest.TestCase):
 
     def test_12_3(self):
         self.assertEqual(max_subarray([1, 2]), 3)
+
+    def test_minus_1(self):
+        self.assertEqual(max_subarray([-1]), -1)
+
+    def test_minus_test2_1(self):
+        self.assertEqual(max_subarray([-2, -1]), -1)
 
 
 if __name__ == "__main__":
