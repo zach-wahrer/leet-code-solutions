@@ -1,14 +1,14 @@
 import unittest
 
 
-# Naive
+# Naive - Times out on leetcode
 def max_profit(prices: list) -> int:
-    profits = [0]
+    max_profit = 0
     for index, buy_price in enumerate(prices):
         for sell_price in prices[index + 1:]:
-            profits.append(sell_price - buy_price)
+            max_profit = max((sell_price - buy_price), max_profit)
 
-    return max(profits)
+    return max_profit
 
 
 class TestMaxProfit(unittest.TestCase):
