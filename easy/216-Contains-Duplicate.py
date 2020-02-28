@@ -1,8 +1,22 @@
 import unittest
 
 
+# Naive O(n**2) time solution
+def contains_duplicate_naive(nums: list) -> bool:
+    for index, value in enumerate(nums):
+        if value in nums[index + 1:]:
+            return True
+    return False
+
+
 def contains_duplicate(nums: list) -> bool:
-    pass
+    seen = set()
+    for i in nums:
+        if i in seen:
+            return True
+        else:
+            seen.add(i)
+    return False
 
 
 class TestContainsDuplicate(unittest.TestCase):
@@ -27,3 +41,7 @@ class TestContainsDuplicate(unittest.TestCase):
 
     def test_22_true(self):
         self.assertTrue(contains_duplicate([2, 2]))
+
+
+if __name__ == "__main__":
+    unittest.main()
