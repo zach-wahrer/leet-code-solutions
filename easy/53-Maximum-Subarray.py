@@ -1,8 +1,18 @@
 import unittest
 
 
+# O(n) time and O(1) space solution
 def max_subarray(nums: list) -> int:
-    pass
+    max_ending_here = 0
+    max_so_far = 0
+
+    for i in nums:
+        max_ending_here += i
+        if max_ending_here < 0:
+            max_ending_here = 0
+        if max_so_far < max_ending_here:
+            max_so_far = max_ending_here
+    return max_so_far
 
 
 class TestMaxSubarray(unittest.TestCase):
@@ -18,3 +28,7 @@ class TestMaxSubarray(unittest.TestCase):
 
     def test_12_3(self):
         self.assertEqual(max_subarray([1, 2]), 3)
+
+
+if __name__ == "__main__":
+    unittest.main()
