@@ -4,6 +4,27 @@ class TreeNode:
         self.left = None
         self.right = None
 
+    def __eq__(self, other):
+        if not isinstance(other, TreeNode):
+            raise TypeError(f'Cannot compare non-TreeNode object of {type(other)}.')
+
+        def _dfs_tree(node: TreeNode) -> TreeNode:
+            yield node
+            if node.left:
+                yield from _dfs_tree(node.left)
+            if node.right:
+                yield from _dfs_tree(node.right)
+
+        for tree1, tree2 in zip(_dfs_tree(self), _dfs_tree(other)):
+            if tree1.val != tree2.val or bool(tree1.left) != bool(tree2.left) \
+                    or bool(tree1.right) != bool(tree2.right):
+                return False
+
+        return True
+
+    def __ne__(self, other):
+        return not self.__eq__(other)
+
     def build_from_heap(self, input_list):
         input_list.insert(0, 0)
         for index, data in enumerate(input_list):
