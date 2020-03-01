@@ -1,9 +1,26 @@
 import unittest
-from models.binary_tree import TreeNode
+from models.binary_tree import TreeNode, preorder
 
 
 def invert_bin_tree(root: TreeNode) -> TreeNode:
-    pass
+    def _dfs_invert(node: TreeNode):
+
+        if node.left and node.right:
+            node.left, node.right = node.right, node.left
+        elif node.left and not node.right:
+            node.right, node.left = node.left, None
+        elif node.right and not node.left:
+            node.left, node.right = node.right, None
+
+        if node.left:
+            _dfs_invert(node.left)
+        if node.right:
+            _dfs_invert(node.right)
+
+    if root:
+        _dfs_invert(root)
+
+    return root
 
 
 class TestInvertTree(unittest.TestCase):
