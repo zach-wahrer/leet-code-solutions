@@ -25,24 +25,16 @@ def num_islands(grid: list) -> int:
             _assimilate(row, col - 1)
 
     memoize = {}
+    count = 0
 
-    def _check_square(row, col, count):
+    for row_position in range(0, len(grid)):
+        for col_position in range(0, len(grid[0])):
+            key = _key_gen(row_position, col_position)
+            if key not in memoize and grid[row_position][col_position] == "1":
+                count += 1
+                _assimilate(row_position, col_position)
 
-        if row == len(grid):
-            return count
-
-        key = _key_gen(row, col)
-
-        if key == 'stop':
-            return _check_square(row + 1, 0, count)
-
-        if key not in memoize and grid[row][col] == "1":
-            count += 1
-            _assimilate(row, col)
-
-        return _check_square(row, col + 1, count)
-
-    return _check_square(0, 0, 0)
+    return count
 
 
 print(num_islands(board))
