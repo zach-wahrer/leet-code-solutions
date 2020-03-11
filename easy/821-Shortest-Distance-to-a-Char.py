@@ -37,6 +37,39 @@ def shortest_distance(S: str, C: str) -> list:
     return distance
 
 
+# O(n) solution
+def shortest_distance(S: str, C: str) -> list:
+    answer_left, answer_right = [], []
+    last_seen = float('-inf')
+
+    for pos, char in enumerate(S):
+        if char == C:
+            answer_left.append(0)
+            last_seen = pos
+
+        else:
+            answer_left.append(pos - last_seen)
+
+    last_seen = float('inf')
+    for pos, char in enumerate(S[::-1]):
+        if char == C:
+            answer_right.append(0)
+            last_seen = pos
+        else:
+            answer_right.append(pos - last_seen)
+
+    answer = []
+    for left, right in zip(answer_left, answer_right[::-1]):
+        if type(left) is not float and type(right) is not float:
+            answer.append(min(left, right))
+        elif type(right) is not float:
+            answer.append(right)
+        else:
+            answer.append(left)
+
+    return answer
+
+
 class TestDistance(unittest.TestCase):
 
     def test_loveleetcode_e(self):
