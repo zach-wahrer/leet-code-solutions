@@ -1,8 +1,24 @@
 import unittest
 
 
+# Recursive Brute Force Solution - Times out on LeetCode
 def can_finish(nums: list) -> bool:
-    pass
+    finishes = []
+
+    def _can_finish(forward_list):
+
+        if len(forward_list) == 1 or len(forward_list) - 1 < forward_list[0]:
+            finishes.append(True)
+            return
+        if forward_list[0] == 0:
+            finishes.append(False)
+            return
+
+        for i in range(1, forward_list[0] + 1):
+            _can_finish(forward_list[i:])
+
+    _can_finish(nums)
+    return True in finishes
 
 
 class TestFinish(unittest.TestCase):
