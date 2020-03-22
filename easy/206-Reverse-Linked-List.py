@@ -2,8 +2,20 @@ import unittest
 from models.linkedList import ListNode
 
 
+# O(n) space/time solution
 def reverse_ll(head: ListNode):
-    pass
+    ll_vals = []
+    node = head
+    while node:
+        ll_vals.append(node.val)
+        node = node.next
+    ll_vals.reverse()
+    node = head
+    for i in ll_vals:
+        node.val = i
+        node = node.next
+
+    return head
 
 
 class TestReverseList(unittest.TestCase):
@@ -22,3 +34,7 @@ class TestReverseList(unittest.TestCase):
         head = ListNode.build([])
         reversed = ListNode.build([])
         self.assertEqual(reverse_ll(head), reversed)
+
+
+if __name__ == "__main__":
+    unittest.main()
