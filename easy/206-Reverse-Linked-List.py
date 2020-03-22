@@ -3,7 +3,7 @@ from models.linkedList import ListNode
 
 
 # O(n) space/time solution
-def reverse_ll(head: ListNode):
+def reverse_ll_iterative(head: ListNode):
     ll_vals = []
     node = head
     while node:
@@ -15,6 +15,28 @@ def reverse_ll(head: ListNode):
         node.val = i
         node = node.next
 
+    return head
+
+
+# Recursive O(n) time/space solution
+def reverse_ll(head: ListNode):
+    if not head:
+        return []
+
+    ll_vals = []
+
+    def _get_vals(node, ll_vals):
+        if node.next:
+            _get_vals(node.next, ll_vals)
+        ll_vals.append(node.val)
+
+    def _put_vals(node, ll_vals):
+        if node.next:
+            _put_vals(node.next, ll_vals)
+        node.val = ll_vals.pop()
+
+    _get_vals(head, ll_vals)
+    _put_vals(head, ll_vals)
     return head
 
 
