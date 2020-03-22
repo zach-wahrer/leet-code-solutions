@@ -1,8 +1,18 @@
 import unittest
 
 
-def reverse_string(s: list) -> None:
+def reverse_string_easy(s: list) -> None:
     s.reverse()
+
+
+def reverse_string(s: list) -> None:
+    p1 = 0
+    p2 = len(s) - 1
+
+    while p1 < p2:
+        s[p1], s[p2] = s[p2], s[p1]
+        p1 += 1
+        p2 -= 1
 
 
 class TestReverseString(unittest.TestCase):
