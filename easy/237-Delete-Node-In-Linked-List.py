@@ -2,8 +2,13 @@ import unittest
 from models.linkedList import ListNode
 
 
+# O(n) time, O(1) space solution
 def del_node(node: ListNode):
-    pass
+    while node.next.next:
+        node.val = node.next.val
+        node = node.next
+    node.val = node.next.val
+    node.next = None
 
 
 class TestDeleteNode(unittest.TestCase):
