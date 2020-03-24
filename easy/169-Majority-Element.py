@@ -1,8 +1,19 @@
 import unittest
 
 
+# O(n) time/space solution
 def find_majority(nums: list) -> int:
-    pass
+    from collections import Counter
+
+    counts = Counter(nums)
+
+    majority = [0, float('-inf')]
+    for i in counts:
+        if counts[i] > majority[1]:
+            majority[0] = i
+            majority[1] = counts[i]
+
+    return majority[0]
 
 
 class TestFindMajority(unittest.TestCase):
