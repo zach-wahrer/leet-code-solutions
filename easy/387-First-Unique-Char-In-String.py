@@ -2,7 +2,7 @@ import unittest
 
 
 # O(n**2) time, O(n) space solution
-def first_unique(s: str) -> int:
+def first_unique_quadradic(s: str) -> int:
     from collections import Counter
 
     counts = Counter(s)
@@ -13,6 +13,18 @@ def first_unique(s: str) -> int:
             unique_positions.append(s.index(i))
 
     return min(unique_positions) if unique_positions else -1
+
+
+# O(n) time/space solution
+def first_unique(s: str) -> int:
+    from collections import Counter
+
+    counts = Counter(s)
+    for index, char in enumerate(s):
+        if counts[char] == 1:
+            return index
+
+    return -1
 
 
 class TestFirstUnique(unittest.TestCase):
@@ -31,6 +43,9 @@ class TestFirstUnique(unittest.TestCase):
 
     def test_z(self):
         self.assertEqual(first_unique('z'), 0)
+
+    def test_zabcefg(self):
+        self.assertEqual(first_unique('zabcefg'), 0)
 
 
 if __name__ == "__main__":
