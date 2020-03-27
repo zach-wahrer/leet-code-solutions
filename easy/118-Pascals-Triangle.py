@@ -1,8 +1,30 @@
 import unittest
 
 
+# O(n) time/space solution
 def gen_pascals(numRows: int) -> list:
-    pass
+    triangle = []
+
+    def _gen_row(row_number, target_rows, triangle):
+        if row_number > target_rows:
+            return triangle
+
+        if row_number == 1:
+            triangle.append([1])
+        elif row_number == 2:
+            triangle.append([1, 1])
+        else:
+            pos = 0
+            row = [1]
+            for i in range(len(triangle[-1]) - 1):
+                row.append(triangle[-1][pos] + triangle[-1][pos + 1])
+                pos += 1
+            row.append(1)
+            triangle.append(row)
+
+        return _gen_row(row_number + 1, target_rows, triangle)
+
+    return _gen_row(1, numRows, triangle)
 
 
 class TestGenPascals(unittest.TestCase):
