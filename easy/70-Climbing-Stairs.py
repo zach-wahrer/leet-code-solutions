@@ -2,6 +2,10 @@ import unittest
 
 
 def how_many_ways(n: int) -> int:
+    memoize = {}
+
+    def _key_gen(remaining_stairs, steps):
+        return (remaining_stairs, steps)
 
     def _climb(remaining_stairs, steps):
         if remaining_stairs == 0:
@@ -10,7 +14,12 @@ def how_many_ways(n: int) -> int:
         if remaining_stairs < 0:
             return 0
 
-        return _climb(remaining_stairs - 1, 1) + _climb(remaining_stairs - 2, 2)
+        key = _key_gen(remaining_stairs, steps)
+
+        if key not in memoize:
+            memoize[key] = _climb(remaining_stairs - 1, 1) + _climb(remaining_stairs - 2, 2)
+
+        return memoize[key]
 
     return _climb(n, 1)
 
