@@ -1,20 +1,38 @@
 import unittest
 
 
+# Iterative O(n)? time, O(1) space solution
 def is_happy(n: int) -> bool:
-    pass
+
+    while True:
+        if n == 1:
+            return True
+        elif n == 4:
+            return False
+
+        new_number = 0
+        for i in str(n)[::]:
+            new_number += int(i) ** 2
+        n = new_number
 
 
 class TestIsHappy(unittest.TestCase):
 
     def test_19(self):
-        self.assert_True(is_happy(19))
+        self.assertTrue(is_happy(19))
 
     def test_1(self):
-        self.assert_True(is_happy(1))
+        self.assertTrue(is_happy(1))
 
     def test_15(self):
-        self.assert_False(is_happy(15))
+        self.assertFalse(is_happy(15))
 
     def test_4(self):
-        self.assert_False(is_happy(4))
+        self.assertFalse(is_happy(4))
+
+    def test_150(self):
+        self.assertFalse(is_happy(150))
+
+
+if __name__ == "__main__":
+    unittest.main()
