@@ -2,7 +2,7 @@ import unittest
 
 
 # Iterative O(n)? time, O(1) space solution
-def is_happy(n: int) -> bool:
+def is_happy_iter(n: int) -> bool:
 
     while True:
         if n == 1:
@@ -14,6 +14,24 @@ def is_happy(n: int) -> bool:
         for i in str(n)[::]:
             new_number += int(i) ** 2
         n = new_number
+
+
+# Recursive solution
+def is_happy(n: int) -> bool:
+
+    def _happy(n):
+        if n == 1:
+            return True
+        elif n == 4:
+            return False
+
+        new_number = 0
+        for i in str(n)[::]:
+            new_number += int(i) ** 2
+
+        return _happy(new_number)
+
+    return _happy(n)
 
 
 class TestIsHappy(unittest.TestCase):
