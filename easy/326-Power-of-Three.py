@@ -2,7 +2,7 @@ import unittest
 
 
 # Iterative O(n) time / O(1) space solution
-def is_power_three(n: int) -> bool:
+def is_power_three_iter(n: int) -> bool:
     if n == 1:
         return True
     accumulator = 3
@@ -11,6 +11,22 @@ def is_power_three(n: int) -> bool:
             return True
         accumulator *= 3
     return False
+
+
+# Recursive O(n) time solution
+def is_power_three(n: int) -> bool:
+    if n == 1:
+        return True
+
+    def _find_power(number):
+        if number == 3:
+            return True
+        if number < 3:
+            return False
+
+        return _find_power(number / 3)
+
+    return _find_power(n)
 
 
 class TestPowerOfThree(unittest.TestCase):
