@@ -1,11 +1,22 @@
 import unittest
 
 
+# Iterative O(n) time / O(1) space solution
 def is_power_three(n: int) -> bool:
-    pass
+    if n == 1:
+        return True
+    accumulator = 3
+    while accumulator <= n:
+        if accumulator == n:
+            return True
+        accumulator *= 3
+    return False
 
 
 class TestPowerOfThree(unittest.TestCase):
+
+    def test_1(self):
+        self.assertTrue(is_power_three(1))
 
     def test_27(self):
         self.assertTrue(is_power_three(27))
@@ -18,3 +29,7 @@ class TestPowerOfThree(unittest.TestCase):
 
     def test_45(self):
         self.assertFalse(is_power_three(45))
+
+
+if __name__ == "__main__":
+    unittest.main()
