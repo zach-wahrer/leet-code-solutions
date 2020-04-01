@@ -1,8 +1,14 @@
 import unittest
 
 
+# Count hash map solution
 def single_num(nums: list) -> int:
-    pass
+    from collections import Counter
+    counts = Counter(nums)
+    for i in counts:
+        if counts[i] == 1:
+            return i
+    return 0
 
 
 class TestSingleNum(unittest.TestCase):
