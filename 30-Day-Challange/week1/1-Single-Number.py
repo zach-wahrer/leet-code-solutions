@@ -2,13 +2,24 @@ import unittest
 
 
 # Count hash map solution
-def single_num(nums: list) -> int:
+def single_num_count(nums: list) -> int:
     from collections import Counter
     counts = Counter(nums)
     for i in counts:
         if counts[i] == 1:
             return i
     return 0
+
+
+# Set solution
+def single_num(nums: list) -> int:
+    unique_nums = set()
+    for i in nums:
+        if i in unique_nums:
+            unique_nums.remove(i)
+        else:
+            unique_nums.add(i)
+    return unique_nums.pop()
 
 
 class TestSingleNum(unittest.TestCase):
