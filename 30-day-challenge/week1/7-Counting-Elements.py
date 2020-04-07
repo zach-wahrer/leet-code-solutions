@@ -2,7 +2,7 @@ import unittest
 
 
 # O(n log n) time / O(1) space solution
-def count_elements(arr: list) -> int:
+def count_elements_sorting(arr: list) -> int:
     arr.sort()
     total_count, provisional_count = 0, 1
     p1, p2 = 0, 1
@@ -21,6 +21,19 @@ def count_elements(arr: list) -> int:
         provisional_count = 1
         p1 = p2
         p2 += 1
+
+    return total_count
+
+
+# O(n) time/space solution
+def count_elements(arr: list) -> int:
+    from collections import Counter
+    counts = Counter(arr)
+    total_count = 0
+
+    for number in counts:
+        if number + 1 in counts:
+            total_count += counts[number]
 
     return total_count
 
