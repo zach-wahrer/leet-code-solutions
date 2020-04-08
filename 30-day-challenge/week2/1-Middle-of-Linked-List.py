@@ -3,7 +3,7 @@ import unittest
 
 
 # O(n) time / O(1) space solution
-def get_middle(head: ListNode) -> ListNode:
+def get_middle_loop(head: ListNode) -> ListNode:
     node = head
     length = 0
     while node:
@@ -17,6 +17,20 @@ def get_middle(head: ListNode) -> ListNode:
         node = node.next
 
     return node
+
+
+# O(n) time/space solution
+def get_middle(head: ListNode) -> ListNode:
+    node = head
+    length = 0
+    lookup = {}
+
+    while node:
+        lookup[length] = node
+        length += 1
+        node = node.next
+
+    return lookup[length // 2]
 
 
 class TestMiddle(unittest.TestCase):
