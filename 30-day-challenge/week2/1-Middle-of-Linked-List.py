@@ -20,7 +20,7 @@ def get_middle_loop(head: ListNode) -> ListNode:
 
 
 # O(n) time/space solution
-def get_middle(head: ListNode) -> ListNode:
+def get_middle_dict(head: ListNode) -> ListNode:
     node = head
     length = 0
     lookup = {}
@@ -31,6 +31,16 @@ def get_middle(head: ListNode) -> ListNode:
         node = node.next
 
     return lookup[length // 2]
+
+
+# O(n) time / two pointer solution
+def get_middle(head: ListNode) -> ListNode:
+    slow = head
+    fast = head
+    while fast and fast.next:
+        slow = slow.next
+        fast = fast.next.next
+    return slow
 
 
 class TestMiddle(unittest.TestCase):
