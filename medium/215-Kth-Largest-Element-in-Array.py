@@ -1,8 +1,10 @@
 import unittest
 
 
+# O(n log(n)) time, O(1) space solution
 def kth_element(nums: list, k: int) -> int:
-    pass
+    nums.sort(reverse=True)
+    return nums[k - 1]
 
 
 class TestKthElement(unittest.TestCase):
