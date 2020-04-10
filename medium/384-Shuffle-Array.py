@@ -6,7 +6,6 @@ class Solution:
 
     def __init__(self, nums):
         self._original_nums = nums
-        self._random_nums = None
 
     def reset(self):
         return self._original_nums
