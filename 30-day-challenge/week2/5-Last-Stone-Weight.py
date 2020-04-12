@@ -2,7 +2,7 @@ import unittest
 
 
 # O(n**2) time solution
-def smash_stones(stones: list) -> int:
+def smash_stones_quadradic(stones: list) -> int:
     def _pop_heaviest(stones):
         heaviest = max(stones)
         stones.remove(heaviest)
@@ -17,6 +17,26 @@ def smash_stones(stones: list) -> int:
 
         if heaviest != sec_heaviest:
             stones.append(heaviest - sec_heaviest)
+
+    return 0
+
+
+# O(n log n) time heap queue solution
+def smash_stones(stones: list) -> int:
+    import heapq
+
+    p_queue = [-stone for stone in stones]
+    heapq.heapify(p_queue)
+
+    while len(p_queue) >= 1:
+        if len(p_queue) == 1:
+            return abs(p_queue[0])
+
+        heaviest = heapq.heappop(p_queue)
+        sec_heaviest = heapq.heappop(p_queue)
+
+        if heaviest != sec_heaviest:
+            heapq.heappush(p_queue, heaviest - sec_heaviest)
 
     return 0
 
