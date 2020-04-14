@@ -2,7 +2,7 @@ import unittest
 
 
 # O(n) solution using slices
-def shift_string(s: str, shift: list) -> str:
+def shift_string_slices(s: str, shift: list) -> str:
     def _get_final_shift(shifts: list):
         amount = 0
         for shift in shifts:
@@ -24,7 +24,7 @@ def shift_string(s: str, shift: list) -> str:
 
 
 # O(n) solution using slices - Improved
-def shift_string(s: str, shift: list) -> str:
+def shift_string_slices_improved(s: str, shift: list) -> str:
     def _get_final_shift(shifts: list):
         amount = 0
         for shift in shifts:
@@ -43,6 +43,34 @@ def shift_string(s: str, shift: list) -> str:
             return string[move:] + string[:move]
 
     return _shift_string(_get_final_shift(shift), s)
+
+
+# O(n) solution using deque
+def shift_string(s: str, shift: list) -> str:
+    from collections import deque
+
+    def _get_final_shift(shifts: list):
+        amount = 0
+        for shift in shifts:
+            if shift[0] == 1:
+                amount += shift[1]
+            else:
+                amount -= shift[1]
+        return amount
+
+    def _move_item(direction, string):
+        if direction == 1:
+            string.appendleft(string.pop())
+        else:
+            string.append(string.popleft())
+
+    def _shift_string(amount, string):
+        move = abs(amount) % len(string)
+        for _ in range(move):
+            _move_item(1, string) if amount > 0 else _move_item(0, string)
+        return "".join(string)
+
+    return _shift_string(_get_final_shift(shift), deque(s))
 
 
 class TestStringShift(unittest.TestCase):
