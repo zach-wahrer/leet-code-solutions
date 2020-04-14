@@ -36,7 +36,7 @@ def shift_string(s: str, shift: list) -> str:
         return amount
 
     def _shift_string(amount, string):
-        move = abs(amount) % len(s)
+        move = abs(amount) % len(string)
         if amount > 0:
             return string[-move:] + string[:-move]
         else:
