@@ -4,39 +4,34 @@ import unittest
 # O(n*m) solution
 def num_of_islands(grid: list) -> int:
 
-    def _key_gen(row, col, memoize, grid):
+    def _key_gen(row, col):
         key = (row, col)
         if key in memoize or row not in range(len(grid)) or col not in range(len(grid[0])):
             return False
         memoize.add(key)
         return key
 
-    def _spread(key, memoize, grid):
+    def _spread(key):
         if not key:
             return
 
         row, col = key
 
         if grid[row][col] != 0:
-            right = _key_gen(row, col + 1, memoize, grid)
-            left = _key_gen(row, col - 1, memoize, grid)
-            up = _key_gen(row - 1, col, memoize, grid)
-            down = _key_gen(row + 1, col, memoize, grid)
-
-            _spread(right, memoize, grid)
-            _spread(left, memoize, grid)
-            _spread(up, memoize, grid)
-            _spread(down, memoize, grid)
+            _spread(_key_gen(row, col + 1))
+            _spread(_key_gen(row, col - 1))
+            _spread(_key_gen(row - 1, col))
+            _spread(_key_gen(row + 1, col))
 
     memoize = set()
     count = 0
 
     for row in range(len(grid)):
         for col in range(len(grid[0])):
-            key = _key_gen(row, col, memoize, grid)
+            key = _key_gen(row, col)
             if key and grid[row][col] == 1:
                 count += 1
-                _spread(key, memoize, grid)
+                _spread(key)
 
     return count
 
