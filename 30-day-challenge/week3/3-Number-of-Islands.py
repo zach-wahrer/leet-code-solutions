@@ -31,10 +31,10 @@ def num_of_islands(grid: list) -> int:
     memoize = set()
     count = 0
 
-    for row_index, row in enumerate(grid):
-        for col_index, col in enumerate(row):
-            key = _key_gen(row_index, col_index, memoize, grid)
-            if key and col == 1:
+    for row in range(len(grid)):
+        for col in range(len(grid[0])):
+            key = _key_gen(row, col, memoize, grid)
+            if key and grid[row][col] == 1:
                 count += 1
                 _spread(key, memoize, grid)
 
