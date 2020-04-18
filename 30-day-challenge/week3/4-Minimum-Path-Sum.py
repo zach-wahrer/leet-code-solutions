@@ -1,13 +1,18 @@
 import unittest
 
 
-# Exceeds time on leetcode
+# Dynamic O(n*m) solution
 def minimum_path(grid: list) -> int:
+
+    memoize = {"oob": float('inf')}
 
     def _key_gen(row, col):
         if row not in range(len(grid)) or col not in range(len(grid[0])):
             return "oob"
-        return (row, col)
+
+        key = (row, col)
+
+        return key
 
     def _traverse(row, col):
         if row == len(grid) - 1 and col == len(grid[0]) - 1:
@@ -15,11 +20,11 @@ def minimum_path(grid: list) -> int:
 
         key = _key_gen(row, col)
 
-        if key == "oob":
-            return float('inf')
+        if key not in memoize:
+            min_path = min(_traverse(row + 1, col), _traverse(row, col + 1))
+            memoize[key] = min_path + grid[row][col]
 
-        min_path = min(_traverse(row + 1, col), _traverse(row, col + 1))
-        return grid[row][col] + min_path
+        return memoize[key]
 
     return _traverse(0, 0)
 
