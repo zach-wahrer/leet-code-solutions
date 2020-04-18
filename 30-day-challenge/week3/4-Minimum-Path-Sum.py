@@ -4,20 +4,16 @@ import unittest
 # Dynamic O(n*m) solution
 def minimum_path(grid: list) -> int:
 
-    memoize = {"oob": float('inf')}
+    fin_row = len(grid) - 1
+    fin_col = len(grid[0]) - 1
+    memoize = {"oob": float('inf'), (fin_row, fin_col): grid[fin_row][fin_col]}
 
     def _key_gen(row, col):
         if row not in range(len(grid)) or col not in range(len(grid[0])):
             return "oob"
-
-        key = (row, col)
-
-        return key
+        return (row, col)
 
     def _traverse(row, col):
-        if row == len(grid) - 1 and col == len(grid[0]) - 1:
-            return grid[row][col]
-
         key = _key_gen(row, col)
 
         if key not in memoize:
