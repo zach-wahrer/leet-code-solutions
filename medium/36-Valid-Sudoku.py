@@ -16,14 +16,14 @@ def is_valid_sudoku(board: list) -> bool:
         if not is_metric_valid(row):
             return False
 
-    col_pointer = 0
-    while col_pointer < len(board[0]):
-        col = []
-        for row in board:
-            col.append(row[col_pointer])
+    col_ptr = 0
+    while col_ptr < len(board[0]):
+        col = [board[0][col_ptr], board[1][col_ptr], board[2][col_ptr],
+               board[3][col_ptr], board[4][col_ptr], board[5][col_ptr],
+               board[6][col_ptr], board[7][col_ptr], board[8][col_ptr]]
         if not is_metric_valid(col):
             return False
-        col_pointer += 1
+        col_ptr += 1
 
     sub_grids = [[], [], [], [], [], [], [], [], []]
     for index, row in enumerate(board):
