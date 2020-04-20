@@ -2,8 +2,29 @@ import unittest
 from binaryTree import TreeNode
 
 
+# Recursive solution
 def build_bst(preorder: list) -> TreeNode:
-    pass
+    if not preorder:
+        return TreeNode("")
+
+    head = TreeNode(preorder[0])
+
+    def _add(value, node):
+        if value < node.val:
+            if not node.left:
+                node.left = TreeNode(value)
+            else:
+                _add(value, node.left)
+        else:
+            if not node.right:
+                node.right = TreeNode(value)
+            else:
+                _add(value, node.right)
+
+    for value in preorder[1:]:
+        _add(value, head)
+
+    return head
 
 
 class TestBSTBuild(unittest.TestCase):

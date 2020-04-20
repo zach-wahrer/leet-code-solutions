@@ -52,7 +52,7 @@ class TreeNode:
                 self.right.add(data, current_level * 2, index)
 
 
-def preorder(tree, depth=0):
+def print_preorder(tree, depth=0):
     if tree:
         print(tree.val, depth)
         if tree.left:
@@ -60,5 +60,5 @@ def preorder(tree, depth=0):
         if tree.right:
             print("Lower right: ", tree.right.val)
         depth += 1
-        preorder(tree.left, depth)
-        preorder(tree.right, depth)
+        print_preorder(tree.left, depth)
+        print_preorder(tree.right, depth)
