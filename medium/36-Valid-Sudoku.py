@@ -1,8 +1,50 @@
 import unittest
 
 
+# O(n) solution
 def is_valid_sudoku(board: list) -> bool:
-    pass
+    def is_metric_valid(values):
+        uniques = set()
+        for i in values:
+            if i != "." and i not in uniques:
+                uniques.add(i)
+            elif i in uniques:
+                return False
+        return True
+
+    for row in board:
+        if not is_metric_valid(row):
+            return False
+
+    col_pointer = 0
+    while col_pointer < len(board[0]):
+        col = []
+        for row in board:
+            col.append(row[col_pointer])
+        if not is_metric_valid(col):
+            return False
+        col_pointer += 1
+
+    sub_grids = [[], [], [], [], [], [], [], [], []]
+    for index, row in enumerate(board):
+        if index in range(3):
+            sub_grids[0] += row[:3]
+            sub_grids[1] += row[3:6]
+            sub_grids[2] += row[6:]
+        elif index in range(3, 6):
+            sub_grids[3] += row[:3]
+            sub_grids[4] += row[3:6]
+            sub_grids[5] += row[6:]
+        else:
+            sub_grids[6] += row[:3]
+            sub_grids[7] += row[3:6]
+            sub_grids[8] += row[6:]
+
+    for sub_grid in sub_grids:
+        if not is_metric_valid(sub_grid):
+            return False
+
+    return True
 
 
 class TestValidSudoku(unittest.TestCase):
