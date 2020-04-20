@@ -27,6 +27,14 @@ class TestBinarySearch(unittest.TestCase):
         test_input.remove(300)
         self.assertFalse(binary_search(test_input, 300))
 
+    def test_a_z_true(self):
+        test_input = [chr(i) for i in range(97, 123)]
+        self.assertTrue(binary_search(test_input, 'r'))
+
+    def test_a_z_false(self):
+        test_input = [chr(i) for i in range(97, 122)]
+        self.assertFalse(binary_search(test_input, 'z'))
+
 
 if __name__ == "__main__":
     unittest.main()
