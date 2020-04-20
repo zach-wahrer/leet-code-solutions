@@ -3,7 +3,7 @@ import unittest
 
 # O(n) solution
 def is_valid_sudoku(board: list) -> bool:
-    def is_metric_valid(values):
+    def _is_metric_valid(values):
         uniques = set()
         for i in values:
             if i != "." and i not in uniques:
@@ -13,41 +13,37 @@ def is_valid_sudoku(board: list) -> bool:
         return True
 
     for row in board:
-        if not is_metric_valid(row):
+        if not _is_metric_valid(row):
             return False
 
-    col_ptr = 0
-    while col_ptr < len(board[0]):
-        col = [board[0][col_ptr], board[1][col_ptr], board[2][col_ptr],
-               board[3][col_ptr], board[4][col_ptr], board[5][col_ptr],
-               board[6][col_ptr], board[7][col_ptr], board[8][col_ptr]]
-        if not is_metric_valid(col):
+    for col in zip(*board):
+        if not _is_metric_valid(col):
             return False
-        col_ptr += 1
 
-    sub_grids = [[], [], [], [], [], [], [], [], []]
-    for index, row in enumerate(board):
-        if index in range(3):
-            sub_grids[0] += row[:3]
-            sub_grids[1] += row[3:6]
-            sub_grids[2] += row[6:]
-        elif index in range(3, 6):
-            sub_grids[3] += row[:3]
-            sub_grids[4] += row[3:6]
-            sub_grids[5] += row[6:]
-        else:
-            sub_grids[6] += row[:3]
-            sub_grids[7] += row[3:6]
-            sub_grids[8] += row[6:]
-
-    for sub_grid in sub_grids:
-        if not is_metric_valid(sub_grid):
-            return False
+    for i in (0, 3, 6):
+        for j in (0, 3, 6):
+            sub_grid = [board[x][y] for x in range(i, i + 3) for y in range(j, j + 3)]
+            if not _is_metric_valid(sub_grid):
+                return False
 
     return True
 
 
 class TestValidSudoku(unittest.TestCase):
+    def test_leet(self):
+        board = [
+            [".", "4", ".", ".", ".", ".", ".", ".", "."],
+            [".", ".", "4", ".", ".", ".", ".", ".", "."],
+            [".", ".", ".", "1", ".", ".", "7", ".", "."],
+            [".", ".", ".", ".", ".", ".", ".", ".", "."],
+            [".", ".", ".", "3", ".", ".", ".", "6", "."],
+            [".", ".", ".", ".", ".", "6", ".", "9", "."],
+            [".", ".", ".", ".", "1", ".", ".", ".", "."],
+            [".", ".", ".", ".", ".", ".", "2", ".", "."],
+            [".", ".", ".", "8", ".", ".", ".", ".", "."]
+        ]
+        self.assertFalse(is_valid_sudoku(board))
+
     def test_valid(self):
         board = [
             ["5", "3", ".", ".", "7", ".", ".", ".", "."],
