@@ -19,9 +19,9 @@ class LRUCache:
         if key in self.value_store:
             self._refresh_value(key)
         else:
-            oldest = self.LRU_queue.popleft()
-            if oldest in self.value_store:
-                self.value_store.pop(oldest)
+            oldest_value = self.LRU_queue.popleft()
+            if oldest_value in self.value_store:
+                self.value_store.pop(oldest_value)
             self.LRU_queue.append(key)
 
         self.value_store[key] = value
