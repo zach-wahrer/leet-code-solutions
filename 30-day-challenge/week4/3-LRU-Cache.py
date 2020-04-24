@@ -3,7 +3,7 @@ from collections import deque
 
 
 # Initial solution - O(n) because of _refresh_value's remove()
-class LRUCache:
+class LRUCacheDeque:
 
     def __init__(self, capacity: int):
         self.LRU_queue = deque(["" for i in range(capacity)])
@@ -29,6 +29,30 @@ class LRUCache:
     def _refresh_value(self, key: int) -> None:
         self.LRU_queue.remove(key)
         self.LRU_queue.append(key)
+
+
+# Ordered dict O(1) solution
+class LRUCache:
+
+    def __init__(self, capacity: int):
+        from collections import OrderedDict
+        self.LRU_dict = OrderedDict()
+        self.capacity = capacity
+
+    def get(self, key: int) -> int:
+        if key in self.LRU_dict:
+            self.LRU_dict.move_to_end(key)
+            return self.LRU_dict[key]
+        return -1
+
+    def put(self, key: int, value: int) -> None:
+        if key in self.LRU_dict:
+            self.LRU_dict.move_to_end(key)
+        else:
+            if len(self.LRU_dict) >= self.capacity:
+                self.LRU_dict.popitem(last=False)
+
+        self.LRU_dict[key] = value
 
 
 class TestLRUCache(unittest.TestCase):
