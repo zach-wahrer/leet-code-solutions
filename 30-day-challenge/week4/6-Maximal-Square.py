@@ -2,7 +2,7 @@ import unittest
 
 
 # Doesn't pass all leetcode tests
-def max_square(matrix: list) -> int:
+def max_square_incomplete(matrix: list) -> int:
 
     def _key_gen(row, col):
         if row not in range(len(matrix)) or col not in range(len(matrix[0])):
@@ -36,6 +36,26 @@ def max_square(matrix: list) -> int:
     return max(square_dimensions) ** 2 if square_dimensions else 0
 
 
+# O(n*m) time/space solution
+def max_square(matrix: list) -> int:
+
+    if not matrix:
+        return 0
+
+    dp = [[0 for char in row] for row in matrix]
+
+    max_square_edge = 0
+
+    for row in range(len(matrix)):
+        for col in range(len(matrix[0])):
+            if matrix[row][col] == "1":
+                dp[row][col] = 1 + min(dp[row][col-1], dp[row-1][col-1], dp[row-1][col])
+
+            max_square_edge = max(max_square_edge, dp[row][col])
+
+    return max_square_edge ** 2
+
+
 class TestMaxSquare(unittest.TestCase):
     def test_4(self):
         grid = [
@@ -45,6 +65,7 @@ class TestMaxSquare(unittest.TestCase):
             ["1", "0", "0", "1", "0"]
         ]
         self.assertEqual(max_square(grid), 4)
+    #
 
     def test_1(self):
         grid = [["1"]]
