@@ -1,22 +1,33 @@
 import unittest
 
 
-# Times out on leetcode
+# O(n) solution, passes, but seems slow
 class FirstUnique:
-    from collections import Counter
+    from collections import OrderedDict
 
     def __init__(self, nums: list):
-        self.queue = nums
+        self.uniques = self.OrderedDict()
+        self.queue = []
+        for num in nums:
+            self.add(num)
 
     def showFirstUnique(self) -> int:
-        counts = self.Counter(self.queue)
-        for num in self.queue:
-            if counts[num] == 1:
-                return num
-        return -1
+        keys = list(self.uniques.keys())
+
+        if self.uniques[keys[0]]:
+            return keys[0]
+        elif self.uniques[keys[-1]]:
+            return keys[-1]
+        else:
+            return -1
 
     def add(self, value: int) -> None:
         self.queue.append(value)
+        if value in self.uniques:
+            self.uniques[value] = False
+            self.uniques.move_to_end(value)
+        else:
+            self.uniques[value] = True
 
 
 class TestFirstUnique(unittest.TestCase):
@@ -29,6 +40,18 @@ class TestFirstUnique(unittest.TestCase):
         self.assertEqual(first_unique.showFirstUnique(), 3)
         first_unique.add(3)
         self.assertEqual(first_unique.showFirstUnique(), -1)
+
+    def test_777777(self):
+        first_unique = FirstUnique([7, 7, 7, 7, 7, 7])
+        self.assertEqual(first_unique.showFirstUnique(), -1)
+        first_unique.add(7)
+        first_unique.add(3)
+        first_unique.add(3)
+        first_unique.add(7)
+        first_unique.add(17)
+        print(first_unique.queue)
+        print(first_unique.uniques)
+        self.assertEqual(first_unique.showFirstUnique(), 17)
 
 
 if __name__ == "__main__":
