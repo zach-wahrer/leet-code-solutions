@@ -1,33 +1,26 @@
 import unittest
 
 
-# O(n) solution, passes, but seems slow
+# O(n) solution
 class FirstUnique:
     from collections import OrderedDict
 
     def __init__(self, nums: list):
-        self.uniques = self.OrderedDict()
-        self.queue = []
+        self.queue = self.OrderedDict()
         for num in nums:
             self.add(num)
 
     def showFirstUnique(self) -> int:
-        keys = list(self.uniques.keys())
-
-        if self.uniques[keys[0]]:
-            return keys[0]
-        elif self.uniques[keys[-1]]:
-            return keys[-1]
-        else:
-            return -1
+        for key in list(self.queue.keys()):
+            if self.queue[key]:
+                return key
+        return -1
 
     def add(self, value: int) -> None:
-        self.queue.append(value)
-        if value in self.uniques:
-            self.uniques[value] = False
-            self.uniques.move_to_end(value)
+        if value in self.queue:
+            self.queue[value] = False
         else:
-            self.uniques[value] = True
+            self.queue[value] = True
 
 
 class TestFirstUnique(unittest.TestCase):
@@ -49,8 +42,7 @@ class TestFirstUnique(unittest.TestCase):
         first_unique.add(3)
         first_unique.add(7)
         first_unique.add(17)
-        print(first_unique.queue)
-        print(first_unique.uniques)
+        first_unique.add(18)
         self.assertEqual(first_unique.showFirstUnique(), 17)
 
 
