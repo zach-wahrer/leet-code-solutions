@@ -1,16 +1,22 @@
 import unittest
 
 
+# Times out on leetcode
 class FirstUnique:
+    from collections import Counter
 
     def __init__(self, nums: list):
-        pass
+        self.queue = nums
 
     def showFirstUnique(self) -> int:
-        pass
+        counts = self.Counter(self.queue)
+        for num in self.queue:
+            if counts[num] == 1:
+                return num
+        return -1
 
     def add(self, value: int) -> None:
-        pass
+        self.queue.append(value)
 
 
 class TestFirstUnique(unittest.TestCase):
