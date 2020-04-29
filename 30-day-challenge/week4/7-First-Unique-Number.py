@@ -1,26 +1,26 @@
 import unittest
 
 
-# O(n) solution
+# O(1) solution
 class FirstUnique:
-    from collections import OrderedDict
 
     def __init__(self, nums: list):
-        self.queue = self.OrderedDict()
+        self.nums_seen = set()
+        self.unique_nums = {}
         for num in nums:
             self.add(num)
 
     def showFirstUnique(self) -> int:
-        for key in list(self.queue.keys()):
-            if self.queue[key]:
-                return key
+        for key in self.unique_nums.keys():
+            return key
         return -1
 
     def add(self, value: int) -> None:
-        if value in self.queue:
-            self.queue[value] = False
-        else:
-            self.queue[value] = True
+        if value not in self.nums_seen:
+            self.nums_seen.add(value)
+            self.unique_nums[value] = True
+        elif value in self.unique_nums:
+            del self.unique_nums[value]
 
 
 class TestFirstUnique(unittest.TestCase):
