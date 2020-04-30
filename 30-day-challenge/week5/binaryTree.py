@@ -25,6 +25,14 @@ class TreeNode:
     def __ne__(self, other):
         return not self.__eq__(other)
 
+    def build(self, arr, node, location):
+        if location < len(arr):
+            node = TreeNode(arr[location])
+            node.left = self.build(arr, node.left, 2 * location + 1)
+            node.right = self.build(arr, node.right, 2 * location + 2)
+
+        return node
+
     def build_from_heap(self, input_list):
         input_list.insert(0, 0)
         for index, data in enumerate(input_list):
