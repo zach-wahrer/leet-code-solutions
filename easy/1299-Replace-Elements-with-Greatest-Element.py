@@ -2,12 +2,25 @@ import unittest
 
 
 # O(n**2) time solution
-def replace_elements(arr: list) -> list:
+def replace_elements_slow(arr: list) -> list:
     for index in range(len(arr)):
         if index == len(arr) - 1:
             arr[index] = -1
         else:
             arr[index] = max(arr[index + 1:])
+
+    return arr
+
+
+# O(n) time, O(1) space solution
+def replace_elements(arr: list) -> list:
+    previous = arr[-1]
+    arr[-1] = -1
+    right_max = float("-inf")
+    for index in range(len(arr) - 2, -1, -1):
+        right_max = max(right_max, previous)
+        previous = arr[index]
+        arr[index] = right_max
 
     return arr
 
