@@ -1,8 +1,13 @@
 import unittest
 
 
+# O(n) time / O(1) space solution
 def max_profit(prices: list) -> int:
-    pass
+    best_profit = 0
+    for i in range(1, len(prices)):
+        sale = prices[i] - prices[i - 1]
+        best_profit = max(best_profit, best_profit + sale)
+    return best_profit
 
 
 class TestMaxProfit(unittest.TestCase):
