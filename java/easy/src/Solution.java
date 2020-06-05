@@ -1,6 +1,29 @@
+import java.util.HashMap;
 
 public class Solution {
+	
+	
 	public int[] twoSum(int[] nums, int target) {
+		int[] solution = {-1, -1};
+		HashMap<Integer, Integer> hash = new HashMap<>();
+		
+		
+		for (int i = 0; i < nums.length; i++) {
+			int complement = target - nums[i];
+			
+			if (hash.get(complement) == null) {
+				hash.put(nums[i], i);
+			} else {
+				solution[0] = hash.get(complement);
+				solution[1] = i;
+				return solution;
+			}
+		}
+		
+		return solution;
+	}
+	
+	public int[] twoSumSlow(int[] nums, int target) {
 		if (nums.length == 2) {
 			int[] solution = {0, 1};
 			return solution;

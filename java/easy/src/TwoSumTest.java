@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 import org.junit.Assert;
 
 import org.junit.jupiter.api.Test;
@@ -17,11 +19,12 @@ class TwoSumTest {
 	
 	@Test
 	void testTwoNums() {
-		int[] nums = {1, 4};
-		int target = 5;
+		int[] nums = {3, 3};
+		int target = 6;
 		int[] solution = {0, 1};
 		
 		Solution solve = new Solution();
+		System.out.println(Arrays.toString(solve.twoSum(nums, target)));
 		int[] proposedSolution = solve.twoSum(nums, target);
 		Assert.assertArrayEquals(proposedSolution, solution);
 	}
