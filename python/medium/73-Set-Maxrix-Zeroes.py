@@ -30,42 +30,11 @@ class Solution:
 
     def _set_zeroes(self) -> None:
         for location in self._locations:
-            self._spread_zeroes(location[0], location[1])
+            self._matrix[location[0]] = [0] * len(self._matrix[location[0]])
+            for row in range(len(self._matrix)):
+                self._matrix[row][location[1]] = 0
 
-    def _spread_zeroes(self, row, col):
-        self._spread_zeroes_left(row, col - 1)
-        self._spread_zeroes_right(row, col + 1)
-        self._spread_zeroes_down(row + 1, col)
-        self._spread_zeroes_up(row - 1, col)
 
-    def _inbounds(self, row, col):
-        if row in range(len(self._matrix)) and col in range(len(self._matrix[0])):
-            return True
-        return False
-
-    def _spread_zeroes_left(self, row, col):
-        if not self._inbounds(row, col):
-            return
-        self._matrix[row][col] = 0
-        self._spread_zeroes_left(row, col - 1)
-
-    def _spread_zeroes_right(self, row, col):
-        if not self._inbounds(row, col):
-            return
-        self._matrix[row][col] = 0
-        self._spread_zeroes_right(row, col + 1)
-
-    def _spread_zeroes_down(self, row, col):
-        if not self._inbounds(row, col):
-            return
-        self._matrix[row][col] = 0
-        self._spread_zeroes_down(row + 1, col)
-
-    def _spread_zeroes_up(self, row, col):
-        if not self._inbounds(row, col):
-            return
-        self._matrix[row][col] = 0
-        self._spread_zeroes_up(row - 1, col)
 
 class TestSetZeroes(unittest.TestCase):
     def test_non_square(self):
