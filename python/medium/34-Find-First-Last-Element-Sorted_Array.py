@@ -1,9 +1,32 @@
 import unittest
 
 
+# O(logn) time, O(1) space solution
 def search_range(nums: list, target: int) -> list:
-    pass
+    start = 0
+    end = len(nums) - 1
 
+    while start <= end:
+        middle = (start + end) // 2
+        if nums[middle] == target:
+            return find_boundaries(middle, target, nums)
+        elif nums[middle] < target:
+            start = middle + 1
+        else:
+            end = middle - 1
+
+    return [-1, -1]
+
+def find_boundaries(index: int, target: int, nums: list) -> list:
+    left_boundary = right_boundary = index
+
+    while left_boundary > 0 and nums[left_boundary - 1] == target:
+        left_boundary -= 1
+
+    while right_boundary < len(nums) - 1 and nums[right_boundary + 1] == target:
+        right_boundary += 1
+
+    return [left_boundary, right_boundary]
 
 class TestSearchRange(unittest.TestCase):
     def test_found(self):
