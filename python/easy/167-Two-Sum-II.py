@@ -2,7 +2,13 @@ import unittest
 
 
 def twoSum(numbers: list, target: int) -> list:
-    pass
+    compliments = {}
+    for index, num in enumerate(numbers):
+        if num in compliments:
+            return [compliments[num], index + 1]
+        else:
+            compliments[target - num] = index + 1
+    return None
 
 
 class TestTwoSum(unittest.TestCase):
