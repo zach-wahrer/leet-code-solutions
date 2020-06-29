@@ -2,6 +2,17 @@ import unittest
 
 
 def twoSum(numbers: list, target: int) -> list:
+    i = 0
+    j = len(numbers) - 1
+    while i < j and numbers[i] + numbers[j] != target:
+        if numbers[i] + numbers[j] > target:
+            j -= 1
+        else:
+            i += 1
+    return [i+1, j+1]
+
+
+def twoSum_with_map(numbers: list, target: int) -> list:
     compliments = {}
     for index, num in enumerate(numbers):
         if num in compliments:
