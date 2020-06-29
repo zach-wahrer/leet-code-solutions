@@ -4,7 +4,7 @@ import "testing"
 
 func TestShortInput(t *testing.T) {
 	input := []int{1, 2, 3}
-	target := 9
+	target := 5
 	got := twoSum(input, target)
 	want := []int{1, 2}
 	if len(got) != 2 {
