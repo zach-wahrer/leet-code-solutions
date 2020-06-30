@@ -1,5 +1,3 @@
-require 'test/unit'
-
 def two_sums(nums, target)
   compliments = {}
   nums.each_with_index do |num, index|
