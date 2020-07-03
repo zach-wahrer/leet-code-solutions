@@ -56,3 +56,14 @@ func TestSame(t *testing.T) {
 	}
 
 }
+
+func TestLeet(t *testing.T) {
+	input := []int{2, 1, 2, 1, 0, 1, 2}
+	got := getMaxProfit(input)
+	want := 2
+
+	if got != want {
+		t.Errorf("unexpected result - want: %v, got: %v", want, got)
+	}
+
+}
